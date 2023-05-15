@@ -1,28 +1,27 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+		<router-view key="$route.path"></router-view>
   </div>
 </template>
 
+
+<script src="./assets/vendor/@popperjs/core/dist/umd/popper.min.js"></script>
+<script src="./assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="./assets/vendor/headroom.js/dist/headroom.min.js"></script>
+
+<!-- Vendor JS -->
+<script src="./assets/vendor/onscreen/dist/on-screen.umd.min.js"></script>
+<script src="./assets/vendor/jarallax/dist/jarallax.min.js"></script>
+<script src="./assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+<script src="./assets/vendor/vivus/dist/vivus.min.js"></script>
+<script src="./assets/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<!-- Pixel JS -->
+<script src="./assets/js/pixel.js"></script>
+
+
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+	export default {};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
