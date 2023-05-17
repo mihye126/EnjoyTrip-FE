@@ -2,7 +2,7 @@
     <!-- Form -->
     <form class="row mb-4 mb-lg-5 pt-2" action="/trip/list" method="get">
 
-        <div class="col-5">
+        <div class="col-3">
 
             <div class="form-group">
                 <div class="input-group">
@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <div class="col-5">
+        <div class="col-3">
 
             <div class="form-group">
                 <div class="input-group">
@@ -29,6 +29,19 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-4">
+
+<div class="form-group">
+    <div class="input-group">
+        <span class="input-group-text" id="basic-addonDate1">
+            <i class="fa-solid fa-i-cursor"></i>       
+        
+        </span>
+        <input typr="text" class="form-control" id="search-keyword" placeholder="검색어 입력" name="keyword"/>
+    </div>
+</div>
+</div>
         <div class="col-2">
             <button class="btn btn-warning " type="submit" id="btn-search" style="width: 100%">Search <i
                     class="fa-solid fa-magnifying-glass m-1" style="float: left;"></i></button>

@@ -10,6 +10,7 @@ const store = new Vuex.Store({
     todos: [],
     todo: {},
     token: null,
+    blog:{},
   },
   getters: {
     isLogin(state) {

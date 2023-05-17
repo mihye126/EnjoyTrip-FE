@@ -122,6 +122,36 @@
         </div>
       </div>
     </section>
+
+    <section class="section section-sm pb-0 mb-n4">
+      <div class="container">
+        <div class="row justify-content-center">
+          <h3 class="text-center">어떤곳을 원하나요?</h3>
+
+           <!-- Using modifiers -->
+  <div class="accordion m-4" role="tablist">
+
+<b-button  v-for="(product, index) in products" :key="index"  v-b-toggle="`${product.id}`" 
+      :class="visible ? null : 'collapsed'"
+      :aria-expanded="visible ? 'true' : 'false'"
+      aria-controls="collapse-4"
+      @click="visible = !visible" 
+      class="m-1 accordion-header" role="tab">{{product.name}}</b-button>
+<!-- Element to collapse -->
+<b-collapse v-for="(product, index) in products" :key="index"  :id="`${product.id}`" role="tabpanel" accordion="product-accordion" class="mb-4" v-model="product.visible" >
+  <b-card>I am collapsible content!</b-card>
+</b-collapse>
+</div>
+        </div>
+
+        <div>
+ 
+</div>
+
+      </div>
+      
+
+    </section>
     <!-- End of Section -->
   </main>
 </template>
@@ -179,6 +209,15 @@ export default {
       ContentTypes: [],
       carousels: [],
       sidos: [],
+      products:[
+        {name:"항공권", id:"product_airplane", visible:true},
+        {name:"숙소" , id:"product_hotel", visible:false},
+        {name:"투어 티켓", id:"product_tour" , visible:false},
+        {name:"국내 렌터카", id:"product_rentcar", visible:false},
+        {name:"패키지", id:"product_package", visible:false},
+        {name:"더보기", id:"product_more", visible:false},
+
+      ]
     };
   },
   methods: {
