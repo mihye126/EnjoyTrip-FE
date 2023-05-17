@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <navigation-header></navigation-header>
-    <trip-main></trip-main>
+    <my-page></my-page>
     <navigation-footer></navigation-footer>
   </div>
 </template>
@@ -9,15 +9,16 @@
 <script>
 // @ is an alias to /src
 
-import TripMain from "@/pages/TripMain.vue";
+import MyPage from "@/pages/MyPage.vue";
 import NavigationFooter from "@/components/navigation/NavigationFooter.vue";
 import NavigationHeader from "@/components/navigation/NavigationHeader.vue";
+
 export default {
-  name: "TripMainView",
+  name: "MyPageView",
   components: {
-    TripMain,
     NavigationFooter,
     NavigationHeader,
+    MyPage,
   },
 };
 </script>

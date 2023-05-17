@@ -1,9 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import TripMainView from "@/views/TripMainView.vue"
+import TripMainView from "@/views/TripMainView.vue";
+import LoginView from "@/views/LoginView.vue";
+import MyPageView from "@/views/MyPageView.vue";
 
-Vue.use(VueRouter); 
+Vue.use(VueRouter);
 
 //VueRouter전역사용 위해.
 //VueRouter(플러그인)은 일반적으로 전역 수준 기능을 Vue에 추가
@@ -11,13 +13,15 @@ Vue.use(VueRouter);
 //this.$router로 접근 가능
 
 export default new VueRouter({
-	mode: "history",
-	routes: [
-		{ path: "/", component: TripMainView , name:"TripMainView"},
-		{ path: "/trips", component: TripMainView },
-		{ path: "/trips?sidocode=:sidocode", component: TripMainView },
+  mode: "history",
+  routes: [
+    { path: "/", component: TripMainView, name: "TripMainView" },
+    { path: "/trips", component: TripMainView },
+    { path: "/trips?sidocode=:sidocode", component: TripMainView },
+    { path: "/login", component: LoginView },
+    { path: "/mypage", component: MyPageView },
 
-		/* { path: "/modify/:no", component: TodoModify },
+    /* { path: "/modify/:no", component: TodoModify },
 		{ path: "/deleteAll", component: TodoModify },  */
-	],
+  ],
 });

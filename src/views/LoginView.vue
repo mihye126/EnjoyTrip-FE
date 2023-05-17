@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <navigation-header></navigation-header>
-    <trip-main></trip-main>
+    <login-page></login-page>
     <navigation-footer></navigation-footer>
   </div>
 </template>
@@ -9,15 +9,16 @@
 <script>
 // @ is an alias to /src
 
-import TripMain from "@/pages/TripMain.vue";
+import LoginPage from "@/pages/LoginPage.vue";
 import NavigationFooter from "@/components/navigation/NavigationFooter.vue";
 import NavigationHeader from "@/components/navigation/NavigationHeader.vue";
+
 export default {
-  name: "TripMainView",
+  name: "LoginView",
   components: {
-    TripMain,
     NavigationFooter,
     NavigationHeader,
+    LoginPage,
   },
 };
 </script>
