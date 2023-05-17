@@ -9,7 +9,7 @@
 <script>
 // @ is an alias to /src
 
-import TripMain from "@/pages/TripMain.vue";
+import TripMain from "@/components/trip/trip-main/TripMain.vue";
 import NavigationFooter from "@/components/navigation/NavigationFooter.vue";
 import NavigationHeader from "@/components/navigation/NavigationHeader.vue";
 export default {

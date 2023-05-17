@@ -9,7 +9,7 @@
 <script>
 // @ is an alias to /src
 
-import LoginPage from "@/pages/LoginPage.vue";
+import LoginPage from "@/components/login/LoginPage.vue";
 import NavigationFooter from "@/components/navigation/NavigationFooter.vue";
 import NavigationHeader from "@/components/navigation/NavigationHeader.vue";
 

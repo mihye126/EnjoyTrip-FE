@@ -71,7 +71,7 @@
 </template>
 <script>
 
-import Constant from '../util/Contant.js';
+import Constant from '@/util/Contant.js';
 
 export default {
     data() {

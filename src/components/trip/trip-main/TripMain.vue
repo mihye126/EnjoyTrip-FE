@@ -70,7 +70,7 @@
             </div>
             <div class="col-lg-6 order-lg-1">
               <img
-                src="../assets/img/sections/about-us-1.jpg"
+                src="@/assets/img/sections/about-us-1.jpg"
                 alt="MapBox Leaflet.js Custom Integration Mockup"
               />
             </div>
@@ -139,28 +139,6 @@ export default {
     };
   },
   methods: {
-    selectAll() {
-      // http.get("/todo").then((response) => {
-      //   console.log(123);
-      //   console.log(this.todos);
-      //   this.todos = response.data;
-      // });
-    },
-    selectAllSidos() {
-      // http.get("/sidos").then((response) => {
-      //   this.sidos = response.data;
-      // });
-    },
-    removeTodo() {
-      // http.delete("/todo/" + no).then(() => {
-      //   this.selectAll();
-      // });
-    },
-    doneTodo() {
-      // http.put("/todo/done", { no, done }).then(() => {
-      //   this.selectAll();
-      // });
-    },
   },
 };
 </script>
