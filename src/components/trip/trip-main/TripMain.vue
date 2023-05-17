@@ -11,9 +11,7 @@
             <h2 class="lead fw-normal text-muted mb-4 px-lg-10">
               Let Enjoy Trip be your compass to discovering new horizons.
             </h2>
-            <!-- <jsp:include page="/views/components/search.jsp" flush="false">
-                        <jsp:param value="${sidos}" name="sidos" />
-                    </jsp:include> -->
+            <TripSearch/>
           </div>
         </div>
       </div>
@@ -25,6 +23,52 @@
           <h3 class="text-center">어디로 떠나고 싶나요?</h3>
         </div>
       </div>
+
+      
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid px-4 px-lg-5">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+          <form class="d-flex">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#!">항공권</a>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="#!">숙소</a></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="#!">투어 티켓</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="#!">국내 렌터카</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="#!">패키지</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="#!">호텔 특가</a>
+              </li>
+              <li>
+                <a
+                  class="nav-link dropdown-toggle"
+                  id="navbarDropdown"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  >더보기</a
+                >
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#!">All Products</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                  <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                </ul>
+              </li>
+            </ul>
+          </form>
+        </div>
+      </div>
+    </nav> -->
+
     </div>
 
     <!--End of Title section-->
@@ -83,52 +127,51 @@
 </template>
 
 <script>
+import TripSearch from '../TripSearch.vue';
 // import http from "@/router/axios-common.js";
-
 export default {
   created() {
-    this.selectAll();
   },
   data() {
     return {
       categories: [
         {
-          img: "/assets/img/location/Seoul.jpg",
+          img: require("@/assets/img/location/Seoul.jpg"),
           code: "1",
           name: "Seoul",
         },
         {
-          img: "/assets/img/location/Jeju.jpg",
+          img: require("@/assets/img/location/Jeju.jpg"),
           code: "39",
           name: "Jeju",
         },
         {
-          img: "/assets/img/location/Busan.jpg",
+          img: require("@/assets/img/location/Busan.jpg"),
           code: "6",
           name: "Busan",
         },
         {
-          img: "/assets/img/location/Sokcho.jpg",
+          img: require("@/assets/img/location/Sokcho.jpg"),
           code: "32",
           name: "Sokcho",
         },
         {
-          img: "/assets/img/location/Suwon.jpg",
+          img:require("@/assets/img/location/Suwon.jpg"),
           code: "31",
           name: "Suwon",
         },
         {
-          img: "/assets/img/location/Jeonju.jpg",
+          img: require("@/assets/img/location/Jeonju.jpg"),
           code: "38",
           name: "Jeonju",
         },
         {
-          img: "/assets/img/location/Incheon.jpg",
+          img: require("@/assets/img/location/Incheon.jpg"),
           code: "2",
           name: "Incheon",
         },
         {
-          img: "/assets/img/location/Gangneung.jpg",
+          img:require("@/assets/img/location/Gangneung.jpg"),
           code: "32",
           name: "Gangneung",
         },
@@ -140,5 +183,8 @@ export default {
   },
   methods: {
   },
+  components:{
+    TripSearch
+  }
 };
 </script>

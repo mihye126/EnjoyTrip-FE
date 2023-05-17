@@ -4,6 +4,8 @@ import VueRouter from "vue-router";
 import TripMainView from "@/views/TripMainView.vue";
 import LoginView from "@/views/LoginView.vue";
 import MyPageView from "@/views/MyPageView.vue";
+import BlogInputView from "@/views/BlogInputView.vue";
+
 
 Vue.use(VueRouter);
 
@@ -20,6 +22,8 @@ export default new VueRouter({
     { path: "/trips?sidocode=:sidocode", component: TripMainView },
     { path: "/login", component: LoginView },
     { path: "/mypage", component: MyPageView },
+    { path: "/blog/new", component: BlogInputView },
+
 
     /* { path: "/modify/:no", component: TodoModify },
 		{ path: "/deleteAll", component: TodoModify },  */
