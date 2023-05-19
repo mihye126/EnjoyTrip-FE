@@ -16,10 +16,10 @@
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1"><span class="fas fa-envelope"></span></span>
                                     <!-- <div v-if="`${!empty cookie.savedId.value}`"> -->
-                                        <input type="text" class="form-control" placeholder="example" id="id" name="id"  v-model="id"  required>
+                                        <input type="text" class="form-control" placeholder="example" id="id" name="id"  v-model.lazy="user.user_id" @keyup.enter="confirm"  required>
                                     <!-- </div> -->
                                     <!-- <div v-if="`${empty cookie.savedId.value}`"> -->
-                                        <input type="text" class="form-control" placeholder="example" id="id" name="id" v-model="id"  required>
+                                        <!-- <input type="text" class="form-control" placeholder="example" id="id" name="id" v-model="id"  required> -->
                                     <!-- </div> -->
                                 </div>
                             </div>
@@ -30,7 +30,7 @@
                                     <label for="pass">비밀번호</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon2"><span class="fas fa-unlock-alt"></span></span>
-                                        <input type="password" placeholder="Password" class="form-control" id="pass" name="pass" v-model="pw"  required>
+                                        <input type="password" placeholder="Password" class="form-control" id="pass" name="pass" v-model.lazy="user.user_pw" @keyup.enter="confirm"  required>
                                     </div>
                                 </div>
                                 <!-- End of Form -->
@@ -52,7 +52,7 @@
                             </div>
                             </div>
                             <div class="d-grid">
-                                <button type="submit" @click.prevent = "postlogin" class="btn btn-primary">로그인</button>
+                                <button type="submit" @click.prevent = "confirm" class="btn btn-primary">로그인</button>
                             </div>
                         </form>
 
@@ -70,43 +70,77 @@
 
 </template>
 <script>
+// import { log } from "console";
+// import { SourceTextModule } from "vm";
+import { mapState, mapActions } from "vuex";
+const userStore = "userStore";
 
-import Constant from '@/util/Contant.js';
+
+// import Constant from '@/util/Contant.js';
 
 export default {
     data() {
         return {
-           // user: {
-                id: "",
-                pw: "",
-          // }
+           user: {
+                user_id: "",
+                user_pw: "",
+          }
             
             
         };
     },
-    methods: {
-
-    async loginAdmin() {
-      try {
-        const token = await this.adminService.loginAdmin(this.adminObj);
-        this.$store.dispatch('setToken', token)
-      } catch (error) {
-        alert('로그인에 실패했습니다.');
-        location.reload();
-      }
+    computed: {
+        ...mapState(userStore, ["isLogin", "isLoginError", "userInfo"]),
     },
-        postlogin() {
-            let newuser = {
-                id: this.id,
-                pw: this.pw,
+     methods: {
+        ...mapActions(userStore, ["userConfirm", "getUserInfo"]),
+        async confirm() {
+        await this.userConfirm(this.user);
+            let token = sessionStorage.getItem("access-token");
+
+            // console.log("1. confirm() token >> " + token);
+
+            // 
+            if (this.isLogin) {
+            await this.getUserInfo(token);
+            // console.log("4. confirm() userInfo :: ", this.userInfo);
+                this.$router.push("/trips"); //메인 페이지로 이동
+                // if(this.$route.path!=='/trips') this.$router.push('/trips') //메인 페이지로 이동
+
+
             }
-            console.log(newuser.id, newuser.pw);
-            this.$store.dispatch(Constant.LOGIN_ACCOUNT, newuser);
+        },
+        movePage() {
+        this.$router.push({ name: "join" }); //회원가입 페이지로 이동
+        },
+    },
 
-            this.$router.push("/");
-        }
 
-    }
+
+
+    // methods: {
+
+    // async loginAdmin() {
+    //   try {
+    //     const token = await this.adminService.loginAdmin(this.adminObj);
+    //     this.$store.dispatch('setToken', token)
+    //   } catch (error) {
+    //     alert('로그인에 실패했습니다.');
+    //     location.reload();
+    //   }
+    // },
+    //     postlogin() {
+    //         let newuser = {
+    //             id: this.id,
+    //             pw: this.pw,
+    //         }
+    //         console.log(newuser.id, newuser.pw);
+    //         this.$store.dispatch(Constant.LOGIN_ACCOUNT, newuser);
+
+    //         this.$router.push("/");
+    //     }
+
+    // }
 
 }
 </script>
