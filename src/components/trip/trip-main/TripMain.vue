@@ -7,7 +7,7 @@
       <div class="container">
         <div class="row">
           <div class="col-12 text-center">
-            <h1 class="fw-bolder display-2">Enjoy Trip</h1>
+            <h1 class="fw-bolder display-2">TravelHub</h1>
             <h2 class="lead fw-normal text-muted mb-4 px-lg-10">
               Let Enjoy Trip be your compass to discovering new horizons.
             </h2>
