@@ -6,7 +6,6 @@ import LoginView from "@/views/LoginView.vue";
 import MyPageView from "@/views/MyPageView.vue";
 import BlogInputView from "@/views/BlogInputView.vue";
 
-
 Vue.use(VueRouter);
 
 //VueRouter전역사용 위해.
@@ -23,7 +22,6 @@ export default new VueRouter({
     { path: "/login", component: LoginView },
     { path: "/mypage", component: MyPageView },
     { path: "/blog/new", component: BlogInputView },
-
 
     /* { path: "/modify/:no", component: TodoModify },
 		{ path: "/deleteAll", component: TodoModify },  */
