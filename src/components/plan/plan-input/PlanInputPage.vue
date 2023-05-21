@@ -80,7 +80,7 @@
 
 <script>
 // import http from "@/router/axios-common.js";
-import PlanMap from "./PlanMap.vue";
+import PlanMap from "../PlanMap.vue";
 import draggable from "vuedraggable";
 import { mapState, mapActions } from "vuex";
 
@@ -94,6 +94,8 @@ export default {
     },
     methods: {
         ...mapActions("planStore", ["GET_TRIP_INFO"])
+    },mounted(){
+        this.GET_TRIP_INFO()
     }
 };
 
