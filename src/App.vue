@@ -7501,12 +7501,12 @@ textarea.form-control-lg {
 
 .progress {
     display: flex;
-    height: 1rem;
+    /* height: 1rem; */
     overflow: hidden;
     font-size: 0.75rem;
     background-color: #F3F4F6;
     border-radius: 1rem;
-    box-shadow: inset 0 1px 2px rgba(23, 31, 56, 0.075);
+    /* box-shadow: inset 0 1px 2px rgba(23, 31, 56, 0.075); */
 }
 
 .progress-bar {
@@ -27518,14 +27518,14 @@ label {
 }
 
 .progress {
-    height: 4px;
+    height: 10px;
     margin-bottom: 1rem;
     overflow: hidden;
     border-radius: 0.6rem;
     background-color: #F3F4F6;
     font-size: 0.75rem;
     font-weight: 600;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    /* box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2); */
 }
 
 .progress-xl {

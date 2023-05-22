@@ -27,6 +27,5 @@ export const store = new Vuex.Store({
     //data관리, 여러개의 컴포넌트에서 사용할 데이터 입력
     todos: [],
     todo: {},
-    blog: {},
   },
 });
