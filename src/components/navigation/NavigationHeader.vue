@@ -6,7 +6,7 @@
       class="navbar navbar-main navbar-expand-lg navbar-theme-primary headroom navbar-dark bg-primary"
     >
       <div class="container position-relative">
-        <router-link class="navbar-brand me-lg-5" href="/trip">
+        <router-link class="navbar-brand me-lg-5" to="/trips">
           <div>
             <img class="navbar-brand-dark" src="/assets/img/brand/light.svg" alt="Logo light" />
             <img class="navbar-brand-light" src="/assets/img/brand/dark.svg" alt="Logo dark" />
