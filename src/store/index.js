@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { userStore } from "./modules/userStore";
+import { tripDetailStore } from "./modules/trip/tripDetailStore";
 import { planStore } from "./modules/planStore";
 
 import createPersistedState from "vuex-persistedstate";
@@ -12,6 +13,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   modules: {
     userStore,
+    tripDetailStore,
     planStore,
   },
   plugins: [

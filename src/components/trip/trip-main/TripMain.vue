@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <div>
     <!-- Hero -->
     <section
       class="section-header overflow-hidden mt-5 pt-7 pt-lg-8 pb-9 pb-lg-12 bg-img text-white"
@@ -11,7 +11,7 @@
             <h2 class="lead fw-normal text-muted mb-4 px-lg-10">
               Let Enjoy Trip be your compass to discovering new horizons.
             </h2>
-            <TripSearch/>
+            <TripSearch />
           </div>
         </div>
       </div>
@@ -24,8 +24,7 @@
         </div>
       </div>
 
-      
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid px-4 px-lg-5">
         <div class="collapse navbar-collapse" id="navbarSupportedContent1">
           <form class="d-flex">
@@ -68,7 +67,6 @@
         </div>
       </div>
     </nav> -->
-
     </div>
 
     <!--End of Title section-->
@@ -92,7 +90,7 @@
         </div>
       </div>
     </div>
-
+    <!-- <router-link to="/trip/23456">상세보기 좀 되라 이자식아</router-link> -->
     <section class="section bg-tertiary pt-0 pb-0">
       <!-- Section -->
       <div class="section section-md">
@@ -128,40 +126,48 @@
         <div class="row justify-content-center">
           <h3 class="text-center">어떤곳을 원하나요?</h3>
 
-           <!-- Using modifiers -->
-  <div class="accordion m-4" role="tablist">
-
-<b-button  v-for="(product, index) in products" :key="index"  v-b-toggle="`${product.id}`" 
-      :class="visible ? null : 'collapsed'"
-      :aria-expanded="visible ? 'true' : 'false'"
-      aria-controls="collapse-4"
-      @click="visible = !visible" 
-      class="m-1 accordion-header" role="tab">{{product.name}}</b-button>
-<!-- Element to collapse -->
-<b-collapse v-for="(product, index) in products" :key="index"  :id="`${product.id}`" role="tabpanel" accordion="product-accordion" class="mb-4" v-model="product.visible" >
-  <b-card>I am collapsible content!</b-card>
-</b-collapse>
-</div>
+          <!-- Using modifiers -->
+          <div class="accordion m-4" role="tablist">
+            <b-button
+              v-for="(product, index) in products"
+              :key="index"
+              v-b-toggle="`${product.id}`"
+              :class="visible ? null : 'collapsed'"
+              :aria-expanded="visible ? 'true' : 'false'"
+              aria-controls="collapse-4"
+              @click="visible = !visible"
+              class="m-1 accordion-header"
+              role="tab"
+              >{{ product.name }}</b-button
+            >
+            <!-- Element to collapse -->
+            <b-collapse
+              v-for="(product, index) in products"
+              :key="index"
+              :id="`${product.id}`"
+              role="tabpanel"
+              accordion="product-accordion"
+              class="mb-4"
+              v-model="product.visible"
+            >
+              <b-card>I am collapsible content!</b-card>
+            </b-collapse>
+          </div>
         </div>
 
-        <div>
- 
-</div>
-
+        <div></div>
       </div>
-      
-
     </section>
     <!-- End of Section -->
-  </main>
+  </div>
 </template>
 
 <script>
-import TripSearch from '../TripSearch.vue';
+import { RouterLink } from "vue-router";
+import TripSearch from "../TripSearch.vue";
 // import http from "@/router/axios-common.js";
 export default {
-  created() {
-  },
+  created() {},
   data() {
     return {
       categories: [
@@ -186,7 +192,7 @@ export default {
           name: "Sokcho",
         },
         {
-          img:require("@/assets/img/location/Suwon.jpg"),
+          img: require("@/assets/img/location/Suwon.jpg"),
           code: "31",
           name: "Suwon",
         },
@@ -201,7 +207,7 @@ export default {
           name: "Incheon",
         },
         {
-          img:require("@/assets/img/location/Gangneung.jpg"),
+          img: require("@/assets/img/location/Gangneung.jpg"),
           code: "32",
           name: "Gangneung",
         },
@@ -209,21 +215,20 @@ export default {
       ContentTypes: [],
       carousels: [],
       sidos: [],
-      products:[
-        {name:"항공권", id:"product_airplane", visible:true},
-        {name:"숙소" , id:"product_hotel", visible:false},
-        {name:"투어 티켓", id:"product_tour" , visible:false},
-        {name:"국내 렌터카", id:"product_rentcar", visible:false},
-        {name:"패키지", id:"product_package", visible:false},
-        {name:"더보기", id:"product_more", visible:false},
-
-      ]
+      products: [
+        { name: "항공권", id: "product_airplane", visible: true },
+        { name: "숙소", id: "product_hotel", visible: false },
+        { name: "투어 티켓", id: "product_tour", visible: false },
+        { name: "국내 렌터카", id: "product_rentcar", visible: false },
+        { name: "패키지", id: "product_package", visible: false },
+        { name: "더보기", id: "product_more", visible: false },
+      ],
     };
   },
-  methods: {
+  methods: {},
+  components: {
+    TripSearch,
+    RouterLink,
   },
-  components:{
-    TripSearch
-  }
 };
 </script>
