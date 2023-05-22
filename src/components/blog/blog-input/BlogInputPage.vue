@@ -20,7 +20,7 @@
               <input type="text" class="form-control" placeholder="제목을 입력해주세요" id="title" required="" name="title">
             </div>
           </div>
-          <tiptap-editor class="col-lg-9" :active-buttons="[
+          <tiptap-editor class="col-lg-9 p-0" :active-buttons="[
             'bold',
             'italic',
             'strike',

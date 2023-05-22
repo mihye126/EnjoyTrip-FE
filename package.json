@@ -12,6 +12,7 @@
     "@tiptap/pm": "^2.0.3",
     "@tiptap/starter-kit": "^2.0.3",
     "@tiptap/vue-2": "^2.0.3",
+    "awesome-vue-star-rating": "^1.0.9",
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "bootstrap-vue": "^2.23.1",

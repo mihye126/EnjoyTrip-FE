@@ -6,6 +6,7 @@ import LoginView from "@/views/LoginView.vue";
 import MyPageView from "@/views/MyPageView.vue";
 import BlogInputView from "@/views/BlogInputView.vue";
 import PlanInputView from "@/views/PlanInputView.vue"
+import BlogDetailView from "@/views/BlogDetailView.vue"
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,8 @@ export default new VueRouter({
     { path: "/mypage", component: MyPageView },
     { path: "/blog/new", component: BlogInputView },
     { path: "/plan/new", component: PlanInputView },
+    { path: "/blog/1", component: BlogDetailView },
+
 
     /* { path: "/modify/:no", component: TodoModify },
 		{ path: "/deleteAll", component: TodoModify },  */

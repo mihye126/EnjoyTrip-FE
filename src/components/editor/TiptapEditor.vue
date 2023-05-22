@@ -135,8 +135,10 @@
       </span>
     </div>
 
-    <editor-content class="editor__content border" :editor="editor" />
-  </div>
+    <editor-content v-if="border" class="editor__content border" :editor="editor" />
+    <editor-content v-else class="editor__content" :editor="editor" />
+
+ </div>
 </template>
 
 <script>
@@ -188,6 +190,14 @@ export default {
       },
       default: () => ['bold', 'italic'],
     },
+    editable:{
+      type:Boolean,
+      default:true
+    },
+    border:{
+      type:Boolean,
+      default:true
+    }
   },
   emits: ['update'],
   data() {
@@ -201,6 +211,7 @@ export default {
       content: this.initialContent,
       extensions: [StarterKit, Underline],
     });
+    this.editor.setOptions({editable: this.editable});
 
     this.json = this.editor.getJSON();
 
@@ -235,5 +246,8 @@ export default {
     'Source Han Sans CN', 'Microsoft YaHei', 'Wenquanyi Micro Hei',
     'WenQuanYi Zen Hei', 'ST Heiti', SimHei, 'WenQuanYi Zen Hei Sharp',
     sans-serif;
+}
+.editor__content{
+  padding: 0.5rem;
 }
 </style>
