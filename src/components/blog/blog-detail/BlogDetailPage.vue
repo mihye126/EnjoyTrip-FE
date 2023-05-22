@@ -1,43 +1,6 @@
 <template>
-<main>
-
-<jsp:include page="/views/components/blog/blog-head.jsp" >
-    <jsp:param value="${hotPlace}" name="hotPlace"/>
-</jsp:include>
-
-<jsp:include page="/views/components/blog/blog-content.jsp" >
-    <jsp:param value="${hotPlace}" name="hotPlace"/>
-</jsp:include>
-
-<div class="section section-md bg-white text-black pt-0 line-bottom-light">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-8">
-
-                <div>
-                    <jsp:include page="/views/components/blog/blog-comment-input.jsp"/>
-
-                    <div class="mt-5">
-                        <jsp:include page="/views/components/blog/blog-comment.jsp"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-</main>
-
-</template>
-
-<script>
-
-Vue.component('blog-title', {
-  // JavaScript에서의 camelCase
-  props: ['blog'],
-  template: 
-  `<section class="section-header pb-5">
+    <main>
+        <section class="section-header pb-5">
     <div class="container">
         <div class="row bg-img card text-white">
             <div class="col-12 mt-5 ">
@@ -47,24 +10,27 @@ Vue.component('blog-title', {
                             <div class="col">
                                 <h2 class="mb-3">{{blog.title}}</h2>
                             </div>
-                            <div class="mb-4">
-                                <div class="badge bg-success text-uppercase me-2 px-3">${blog.contentTypeID}</div> </div>
-                            <div class="post-meta"><span class="fw-bold me-3">작성자: ${blog.userName}</span></div>
+                            <div class="post-meta"><span class="fw-bold me-3">작성자: {{blog.userName}}</span></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>`
-})
+</section>
+  
+      <section class="section section-lg pt-2">
+        <div class="container">
+          <div class="row justify-content-center mb-2 mb-lg-6">
 
-Vue.component('blog-share', {
-  // JavaScript에서의 camelCase
-  props: ['blog'],
-  template: 
-  `  <div class="row justify-content-sm-center align-items-center py-3 mt-3">
-    <div class="col-12 col-lg-8">
+            <tiptap-editor class="col-lg-9 p-0" :active-buttons="[]" 
+            :initialContent="blog.content"
+            :editable="false"
+            :border="false"
+            />
+
+            <div class="row justify-content-sm-center align-items-center py-3">
+    <div class="col-12 col-lg-9">
         <div class="row">
             <div class="col-9 col-md-6">
                 <h6 class="fw-bolder d-inline mb-0 me-3">Share:</h6><button
@@ -75,13 +41,46 @@ Vue.component('blog-share', {
                 <button class="btn btn-sm btn-icon-only btn-pill bg-orange d-inline text-white"
                         aria-label="reddit social link"><span class="fab fa-reddit-alien"></span></button>
             </div>
-            <div class="col-3 col-md-6 text-right"><span class="far fa-bookmark text-primary"
-                                                         data-bs-toggle="tooltip" data-bs-placement="top" title=""
-                                                         data-original-title="Bookmark story" data-bs-original-title="Bookmark story"
-                                                         aria-label="Bookmark story"></span></div>
+            <div class="col-3 col-md-6 text-right">
+                
+                <button class="btn btn-sm me-2 btn-icon-only btn-pill d-inline btn-danger"
+                        aria-label="edit"> <i class="fa-solid fa-pen"></i></button></div>
         </div>
     </div>
-</div>`
-})
-export default {};
-</script>
+    <div class="col-12 col-lg-9">
+        <utterances-comment/>
+    </div>
+</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </template>
+  
+  <script>
+  import TiptapEditor from "@/components/editor/TiptapEditor.vue"
+  import UtterancesComment from '../../board/UtterancesComment.vue';
+
+  export default {
+    components: {
+      TiptapEditor,
+      UtterancesComment
+    },
+    data() {
+      return {
+        editor: null,
+        blog:{
+            title:"테스트",
+            userName:"김싸피",
+            content:" 크크크루삥뽕"
+        }
+    }
+    },methods:{
+      updateBlog(){
+        //서버로 blog 데이터 보내기
+      }
+    }
+  };
+  </script>
+  
+  

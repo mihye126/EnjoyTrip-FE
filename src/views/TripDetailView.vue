@@ -7,11 +7,11 @@
 </template>
 
 <script>
-import TripView from "@/components/trip/trip-view/TripView.vue";
+import TripView from "@/components/trip/trip-view/TripDetailPage.vue";
 import NavigationFooter from "@/components/navigation/NavigationFooter.vue";
 import NavigationHeader from "@/components/navigation/NavigationHeader.vue";
 export default {
-  name: "TripMainView",
+  name: "TripDetailView",
   components: {
     TripView,
     NavigationFooter,
