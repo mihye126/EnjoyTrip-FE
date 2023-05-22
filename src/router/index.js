@@ -5,6 +5,7 @@ import TripMainView from "@/views/TripMainView.vue";
 import LoginView from "@/views/LoginView.vue";
 import MyPageView from "@/views/MyPageView.vue";
 import BlogInputView from "@/views/BlogInputView.vue";
+import TripDetailView from "@/views/TripDetailView.vue";
 import PlanInputView from "@/views/PlanInputView.vue"
 
 Vue.use(VueRouter);
@@ -23,6 +24,7 @@ export default new VueRouter({
     { path: "/login", component: LoginView },
     { path: "/mypage", component: MyPageView },
     { path: "/blog/new", component: BlogInputView },
+    { path: "/trip/:contentID", component: TripDetailView },
     { path: "/plan/new", component: PlanInputView },
 
     /* { path: "/modify/:no", component: TodoModify },
