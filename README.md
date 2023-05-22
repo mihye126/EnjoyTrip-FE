@@ -1,4 +1,4 @@
-# enjoy-trip
+# TravelHub
 
 ## Project setup
 ```

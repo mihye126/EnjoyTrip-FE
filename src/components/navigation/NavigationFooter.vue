@@ -36,10 +36,10 @@
       <div class="col-6 col-md-2 mb-5 mb-lg-0">
         <span class="h5">Themesberg</span>
         <ul class="footer-links mt-2">
-          <li><a target="_blank" href="https://themesberg.com/blog">Blog</a></li>
-          <li><a target="_blank" href="https://themesberg.com/themes">Themes</a></li>
-          <li><a target="_blank" href="https://themesberg.com/about">About Us</a></li>
-          <li><a target="_blank" href="https://themesberg.com/contact">Contact Us</a></li>
+          <li><router-link target="_blank" to="/blog">Blog</router-link></li>
+          <li><router-link target="_blank" to="https://themesberg.com/themes">Themes</router-link></li>
+          <li><router-link target="_blank" to="https://themesberg.com/about">About Us</router-link></li>
+          <li><router-link target="_blank" to="https://themesberg.com/contact">Contact Us</router-link></li>
         </ul>
       </div>
       <div class="col-6 col-md-2 mb-5 mb-lg-0">
