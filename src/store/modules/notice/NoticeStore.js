@@ -10,13 +10,13 @@ export const NoticeStore = {
   mutations: {
     SET_NOTICE: (state, data) => {
       state.notice = data;
-      console.log(state.notice);
+      console.log("///", state.notice);
     },
   },
 
   actions: {
-    async NoticeList({ commit }) {
-      console.log("notice 연결됨?");
+    async NoticeList({ commit }, pagenum) {
+      console.log("notice 연결됨?", pagenum);
       await noticeAllList(
         ({ data }) => {
           if (data.error == null) {

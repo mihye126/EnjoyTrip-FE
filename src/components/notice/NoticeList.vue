@@ -16,13 +16,6 @@
           <br /><br />
           <div class="accordion bg-white rounded" id="notice-list">
             <NoticeItem v-for="notice in notices" :key="notice.id" :notice="notice"></NoticeItem>
-            <!-- <c:forEach items="${notices}" var="notice">
-                <jsp:include page="/views/components/notice/notice-item.jsp">
-                  <jsp:param name="title" value="${notice.title}" />
-                  <jsp:param name="content" value="${notice.content}" />
-                  <jsp:param name="num" value="${notice.id}" />
-                </jsp:include>
-              </c:forEach> -->
           </div>
         </div>
       </div>
@@ -43,6 +36,7 @@ export default {
   data() {
     return {
       notices: [],
+      page: 0,
     };
   },
   created() {
@@ -50,11 +44,10 @@ export default {
     console.log(this.notice);
   },
   methods: {
-    setNotice: function () {
-      // console.log("!!", this.$store.state.NoticeStore.notice);
-      // console.log("@@", this.$store.state.userStore.isAdmin);
+    setNotice: async function () {
+      await this.$store.dispatch("NoticeStore/NoticeList", this.page);
+      console.log("확인 ", this.$store.state.NoticeStore.notice);
       this.notices = this.$store.state.NoticeStore.notice;
-      this.$store.dispatch("NoticeStore/NoticeList");
     },
   },
 };

@@ -41,16 +41,15 @@ export default {
   data() {
     return {
       visible: false,
-      // num: "",
     };
   },
-  created() {
-    this.num = this.notice.id;
-    console.log(this.num);
-  },
+  // created() {
+  //   this.num = this.notice.id;
+  //   console.log(this.num);
+  // },
   methods: {
     deleteNotice: function () {
-      // this.$store.dispatch(`/notice/delete?num=${this.notice.id}`);
+      this.$store.dispatch("NoticeStore/DeleteItem", this.notice.id);
     },
     modifyNotice: function () {
       // this.$stpre.dispatch(``);
