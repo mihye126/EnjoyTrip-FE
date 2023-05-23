@@ -82,7 +82,7 @@
               to="/account/logout"
               target="_blank"
               class="btn btn-tertiary"
-              @click="logout"
+              @click.prevent="logout"
             >
               <i class="fa-solid fa-right-to-bracket"></i> Sign Out
             </router-link>
@@ -132,6 +132,9 @@ export default {
     setUserToken: function () {
       this.token = this.checkToken;
       console.log("sddd", this.token);
+    },
+    logout: function () {
+      console.log("!!!!!");
     },
   },
 };
