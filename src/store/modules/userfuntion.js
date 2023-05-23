@@ -1,12 +1,11 @@
 import http from "@/axios/axios-common.js";
 
 async function login(user, success, fail) {
-  console.log(user);
-  await http.post(`/account`, JSON.stringify(user)).then(success).catch(fail);
+  await http.post(`/login`, JSON.stringify(user)).then(success).catch(fail);
 }
 
 async function findById(userid, success, fail) {
-  http.defaults.headers["access-token"] = sessionStorage.getItem("access-token");
+  http.defaults.headers["accessToken"] = sessionStorage.getItem("access-token");
   await http.get(`/account/info/${userid}`).then(success).catch(fail);
 }
 
