@@ -78,14 +78,10 @@
             >
               {{ user_info }}님 유저정보 바로가기</router-link
             >
-            <router-link
-              to="/account/logout"
-              target="_blank"
-              class="btn btn-tertiary"
-              @click.prevent="logout"
-            >
+            <button class="btn btn-tertiary" @click="logout">
               <i class="fa-solid fa-right-to-bracket"></i> Sign Out
-            </router-link>
+            </button>
+            <!--창 사이즈 줄어들었을 때 메뉴나오게 하는 버튼-->
             <button
               class="navbar-toggler ms-2"
               type="button"
@@ -94,6 +90,7 @@
               aria-controls="navbar_global"
               aria-expanded="false"
               aria-label="Toggle navigation"
+              @click.prevent="logout"
             >
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -113,28 +110,33 @@ export default {
   data() {
     return {
       user_info: "",
+      user_Id: "",
       token: "",
     };
   },
   created() {
-    this.setUserInfo(), this.setUserToken();
+    this.setUserInfo(), this.setUserToken(), this.setUserID();
   },
   computed: {
     ...mapGetters(userStore, ["checkUserInfo"]),
     ...mapGetters(userStore, ["checkToken"]),
+    ...mapGetters(userStore, ["checkUserId"]),
+
     // this.user_info = store.checkUserInfo;
   },
   methods: {
     setUserInfo: function () {
       this.user_info = this.checkUserInfo;
-      console.log("sddd", this.user_info);
     },
     setUserToken: function () {
       this.token = this.checkToken;
-      console.log("sddd", this.token);
     },
-    logout: function () {
-      console.log("!!!!!");
+    setUserID: function () {
+      this.user_Id = this.checkUserId;
+    },
+    logout: async function () {
+      await this.$store.dispatch("userStore/userLogout", this.user_Id);
+      this.$router.push("/");
     },
   },
 };

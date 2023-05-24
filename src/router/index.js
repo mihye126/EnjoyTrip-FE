@@ -10,6 +10,7 @@ import PlanInputView from "@/views/PlanInputView.vue";
 import BlogDetailView from "@/views/BlogDetailView.vue";
 import TripListView from "@/views/TripListView.vue";
 import NoticeListView from "@/views/NoticeListView.vue";
+import NoticeInsertView from "@/views/NoticeInsertView.vue";
 
 Vue.use(VueRouter);
 
@@ -31,6 +32,7 @@ export default new VueRouter({
     { path: "/plans/new", component: PlanInputView },
     { path: "/blogs/1", component: BlogDetailView },
     { path: "/notice/list", component: NoticeListView },
+    { path: "/notice/insert", component: NoticeInsertView },
 
     /* { path: "/modify/:no", component: TodoModify },
 		{ path: "/deleteAll", component: TodoModify },  */
