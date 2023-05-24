@@ -35,10 +35,7 @@ export default new VueRouter({
     { path: "/plans/new", component: PlanInputView },
     { path: "/blogs/1", component: BlogDetailView },
     { path: "/notice/list", component: NoticeListView },
-<<<<<<< HEAD
-=======
     { path: "/notice/insert", component: NoticeInsertView },
->>>>>>> 4c706ce4c3ccbfddcd54c9c794e8c6cbea0c47cf
 
     /* { path: "/modify/:no", component: TodoModify },
 		{ path: "/deleteAll", component: TodoModify },  */
