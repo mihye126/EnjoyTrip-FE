@@ -71,13 +71,12 @@
             </button>
           </div>
           <div v-else>
-            <router-link
-              to="/info"
-              target="_blank"
+            <button
+              @click.prevent="mypage"
               class="btn btn-outline-gray-100 d-none d-lg-inline me-md-3"
             >
-              {{ user_info }}님 유저정보 바로가기</router-link
-            >
+              {{ userName }}님 유저정보 바로가기
+            </button>
             <button class="btn btn-tertiary" @click="logout">
               <i class="fa-solid fa-right-to-bracket"></i> Sign Out
             </button>
@@ -102,45 +101,42 @@
 </template>
 
 <script>
-// import hppt from "@/router";
 import { mapGetters } from "vuex";
 const userStore = "userStore";
-// import { store } from "@/store/modules/userStore";
 export default {
   data() {
     return {
-      user_info: "",
-      user_Id: "",
+      userName: "",
+      userId: "",
       token: "",
     };
   },
   created() {
-    this.setUserInfo(), this.setUserToken(), this.setUserID();
+    this.setUserName(), this.setUserToken(), this.setUserID();
   },
   computed: {
-    ...mapGetters(userStore, ["checkUserInfo"]),
+    ...mapGetters(userStore, ["checkUserName"]),
     ...mapGetters(userStore, ["checkToken"]),
     ...mapGetters(userStore, ["checkUserId"]),
-
-    // this.user_info = store.checkUserInfo;
   },
   methods: {
-    setUserInfo: function () {
-      this.user_info = this.checkUserInfo;
+    setUserName: function () {
+      this.userName = this.checkUserName;
     },
     setUserToken: function () {
       this.token = this.checkToken;
     },
     setUserID: function () {
-      this.user_Id = this.checkUserId;
+      this.userId = this.checkUserId;
     },
     logout: async function () {
-      await this.$store.dispatch("userStore/userLogout", this.user_Id);
+      await this.$store.dispatch("userStore/userLogout", this.userId);
       this.$router.push("/");
+    },
+    mypage: async function () {
+      this.$router.push("/mypage");
     },
   },
 };
-
-// export default { components: { router } };
 </script>
 <style></style>
