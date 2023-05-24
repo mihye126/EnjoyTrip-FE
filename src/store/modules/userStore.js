@@ -8,7 +8,9 @@ export const userStore = {
     isLogin: false,
     isLoginError: false,
     userInfo: null,
+    userId: null,
     isValidToken: false,
+    isAdmin: false,
   },
   getters: {
     checkUserInfo: function (state) {
@@ -16,6 +18,12 @@ export const userStore = {
     },
     checkToken: function (state) {
       return state.isValidToken;
+    },
+    checkIsAdmin: function (state) {
+      return state.isAdmin;
+    },
+    checkUserId: function (state) {
+      return state.userId;
     },
   },
   mutations: {
@@ -29,36 +37,60 @@ export const userStore = {
       state.isValidToken = isValidToken;
     },
     SET_USER_INFO: (state, userInfo) => {
-      state.isLogin = true;
       state.userInfo = userInfo;
+    },
+    SET_USER_ID: (state, userId) => {
+      state.userId = userId;
+    },
+    SET_IS_ADMIN: (state, isAdmin) => {
+      state.isAdmin = isAdmin;
     },
   },
   actions: {
     async userConfirm({ commit }, user) {
+      console.log("user", user);
       await login(
         user,
         ({ data }) => {
-          if (data.login === "YES") {
-            // console.log(data);
-            let accessToken = data["access-token"];
-            let refreshToken = data["refresh-token"];
+          if (data.data != null) {
+            console.log("다 된거니??", data);
+            let accessToken = data.data["accessToken"];
+            let refreshToken = data.data["refreshToken"];
             // console.log("login success token created!!!! >> ", accessToken, refreshToken);
             commit("SET_IS_LOGIN", true);
             commit("SET_IS_LOGIN_ERROR", false);
             commit("SET_IS_VALID_TOKEN", true);
+            console.log(data.data["id"]);
+
+            commit("SET_USER_INFO", data.data["userName"], data.data["id"]);
+            commit("SET_USER_ID", data.data["id"]);
+
+            console.log(this.state.userInfo, ">>>>", this.state.userId);
+
             sessionStorage.setItem("access-token", accessToken);
             sessionStorage.setItem("refresh-token", refreshToken);
+            console.log("관리자니?", data.data["admin"]);
+            //관리자 계정인 경우
+            if (data.data["admin"] === true) {
+              commit("SET_IS_ADMIN", true);
+            }
           } else {
             commit("SET_IS_LOGIN", false);
             commit("SET_IS_LOGIN_ERROR", true);
             commit("SET_IS_VALID_TOKEN", false);
+            alert("이메일 또는 비번이 틀렸습니다. 다시 입력해주세요");
+            // console.log("아니구나", data);
           }
         },
         (error) => {
+          alert("이메일 또는 비번이 틀렸습니다. 다시 입력해주세요");
           console.log(error);
+          // console.log("또 에러인거니?");
         }
       );
     },
+
+    //일단 마이페이지에서 사용하기로 합시다. => 대신 유저 이름 뿐만 아니라 유저 객체 반환하도록 생성
     async getUserInfo({ commit, dispatch }, token) {
       let decodeToken = jwtDecode(token);
       // console.log("2. getUserInfo() decodeToken :: ", decodeToken.userid);
@@ -128,10 +160,17 @@ export const userStore = {
       await logout(
         userid,
         ({ data }) => {
-          if (data.message === "success") {
+          console.log(data);
+          if (data.error == null) {
             commit("SET_IS_LOGIN", false);
             commit("SET_USER_INFO", null);
             commit("SET_IS_VALID_TOKEN", false);
+            commit("SET_USER_ID", null);
+            commit("SET_IS_LOGIN_ERROR", false);
+            commit("SET_IS_ADMIN", false);
+
+            sessionStorage.removeItem("access-token");
+            sessionStorage.removeItem("refresh-token");
           } else {
             console.log("유저 정보 없음!!!!");
           }
