@@ -1,38 +1,59 @@
 <template>
-<div class="accordion-item">
-  <h2 class="accordion-header" id="heading-${num}">
-    <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapse-${num}"
-            aria-expanded="false"
-            aria-controls="collapseOne"
-    >
-      ${title}
-    </button>
-  </h2>
-  <div id="collapse-${num}" class="accordion-collapse collapse" aria-labelledby="heading-${num}" data-bs-parent="#notice-list">
-    <div class="accordion-body">
+  <div class="accordion" role="tablist">
+    <b-card no-body class="mb-1">
+      <b-card-header header-tag="header" class="p-1" role="tab">
+        <b-button
+          v-b-toggle="`${notice.id}`"
+          :class="this.visible ? null : 'collapsed'"
+          :aria-expanded="this.visible ? 'true' : 'false'"
+          aria-controls="collapse-4"
+          variant="light"
+          @click="this.visible = !this.visible"
+          class="m-1 accordion-header"
+          role="tab"
+          >{{ notice.title }}</b-button
+        >
+      </b-card-header>
 
-      <div class="row">
-        ${content}
-      </div>
-<c:if test="${sessionScope.user.id=='admin123'}">
-  <div class="row">
-    <a type="button" class="btn btn-primary me-1 mt-3" href="/notice/delete?num=${num}">삭제</a>
+      <!-- Element to collapse -->
+      <b-card-body>
+        <b-collapse
+          :id="`${notice.id}`"
+          role="tabpanel"
+          accordion="product-accordion"
+          class="mb-4"
+          v-model="this.visible"
+        >
+          {{ notice.content }}
+          <div class="row-2 float-right">
+            <button class="btn btn-primary me-1 mt-3" @click="modifyNotice">수정</button>
+            <button class="btn btn-danger me-1 mt-3" @click="deleteNotice">삭제</button>
+          </div>
+        </b-collapse>
+      </b-card-body>
+    </b-card>
   </div>
-</c:if>
-
-
-
-    </div>
-  </div>
-</div>
-
-	
 </template>
 
 <script>
-	export default {};
+export default {
+  props: ["notice"],
+  data() {
+    return {
+      visible: false,
+    };
+  },
+  // created() {
+  //   this.num = this.notice.id;
+  //   console.log(this.num);
+  // },
+  methods: {
+    deleteNotice: function () {
+      this.$store.dispatch("NoticeStore/DeleteItem", this.notice.id);
+    },
+    modifyNotice: function () {
+      // this.$stpre.dispatch(``);
+    },
+  },
+};
 </script>
