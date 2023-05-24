@@ -27,5 +27,8 @@ async function deleteUser(userEmail, success, fail) {
   console.log("delete 들어오니?", userEmail, success, fail);
   // await http.delete(`/deleteuser`, userEmail).then(success).catch(fail);
 }
-
-export { login, findById, tokenRegeneration, logout, updateLoginUser, deleteUser };
+async function registerUser(user, success, fail) {
+  console.log("register 들어오니?", user, success, fail);
+  // await http.post(`/registeruser`, user).then(success).catch(fail);
+}
+export { login, findById, tokenRegeneration, logout, updateLoginUser, deleteUser, registerUser };

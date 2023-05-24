@@ -7,6 +7,7 @@ import {
   logout,
   updateLoginUser,
   deleteUser,
+  registerUser,
 } from "./userfuntion";
 
 export const userStore = {
@@ -262,6 +263,22 @@ export const userStore = {
             sessionStorage.removeItem("refresh-token");
           } else {
             console.log("유저 탈퇴 실패!!!");
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    async RegisterUser({ commit }, user) {
+      await registerUser(
+        user,
+        ({ data }) => {
+          console.log(data, commit);
+          if (data.error == null) {
+            alert("회원가입이 완료되었습니다. 로그인 후에 이용해주세요");
+          } else {
+            console.log("회원가입 실패!!!");
           }
         },
         (error) => {

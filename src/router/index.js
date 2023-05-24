@@ -11,6 +11,7 @@ import BlogDetailView from "@/views/BlogDetailView.vue";
 import TripListView from "@/views/TripListView.vue";
 import NoticeListView from "@/views/NoticeListView.vue";
 import NoticeInsertView from "@/views/NoticeInsertView.vue";
+import UserRegisterView from "@/views/UserRegisterView.vue";
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,7 @@ export default new VueRouter({
     { path: "/blogs/1", component: BlogDetailView },
     { path: "/notice/list", component: NoticeListView },
     { path: "/notice/insert", component: NoticeInsertView },
+    { path: "/register", component: UserRegisterView },
 
     /* { path: "/modify/:no", component: TodoModify },
 		{ path: "/deleteAll", component: TodoModify },  */
