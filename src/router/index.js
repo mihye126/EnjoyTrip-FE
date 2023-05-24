@@ -10,6 +10,10 @@ import PlanInputView from "@/views/PlanInputView.vue";
 import BlogDetailView from "@/views/BlogDetailView.vue";
 import TripListView from "@/views/TripListView.vue";
 import NoticeListView from "@/views/NoticeListView.vue";
+<<<<<<< HEAD
+=======
+import NoticeInsertView from "@/views/NoticeInsertView.vue";
+>>>>>>> 4c706ce4c3ccbfddcd54c9c794e8c6cbea0c47cf
 
 Vue.use(VueRouter);
 
@@ -31,6 +35,10 @@ export default new VueRouter({
     { path: "/plans/new", component: PlanInputView },
     { path: "/blogs/1", component: BlogDetailView },
     { path: "/notice/list", component: NoticeListView },
+<<<<<<< HEAD
+=======
+    { path: "/notice/insert", component: NoticeInsertView },
+>>>>>>> 4c706ce4c3ccbfddcd54c9c794e8c6cbea0c47cf
 
     /* { path: "/modify/:no", component: TodoModify },
 		{ path: "/deleteAll", component: TodoModify },  */

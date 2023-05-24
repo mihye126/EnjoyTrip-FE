@@ -54,7 +54,10 @@
                       id="pass"
                       name="pass"
                       v-model.lazy="user.password"
+<<<<<<< HEAD
                       @keyup.enter="confirm"
+=======
+>>>>>>> 4c706ce4c3ccbfddcd54c9c794e8c6cbea0c47cf
                       required
                     />
                   </div>
@@ -79,7 +82,11 @@
                 </div>
               </div>
               <div class="d-grid">
+<<<<<<< HEAD
                 <button type="submit" @click.prevent="confirm" class="btn btn-primary">
+=======
+                <button @click.prevent="confirm" @keyup.enter="confirm" class="btn btn-primary">
+>>>>>>> 4c706ce4c3ccbfddcd54c9c794e8c6cbea0c47cf
                   로그인
                 </button>
               </div>

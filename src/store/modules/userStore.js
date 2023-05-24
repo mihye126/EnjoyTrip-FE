@@ -8,6 +8,7 @@ export const userStore = {
     isLogin: false,
     isLoginError: false,
     userInfo: null,
+    userId: null,
     isValidToken: false,
     isAdmin: false,
   },
@@ -17,6 +18,12 @@ export const userStore = {
     },
     checkToken: function (state) {
       return state.isValidToken;
+    },
+    checkIsAdmin: function (state) {
+      return state.isAdmin;
+    },
+    checkUserId: function (state) {
+      return state.userId;
     },
   },
   mutations: {
@@ -30,9 +37,17 @@ export const userStore = {
       state.isValidToken = isValidToken;
     },
     SET_USER_INFO: (state, userInfo) => {
+<<<<<<< HEAD
       // state.isLogin = true;
       state.userInfo = userInfo;
     },
+=======
+      state.userInfo = userInfo;
+    },
+    SET_USER_ID: (state, userId) => {
+      state.userId = userId;
+    },
+>>>>>>> 4c706ce4c3ccbfddcd54c9c794e8c6cbea0c47cf
     SET_IS_ADMIN: (state, isAdmin) => {
       state.isAdmin = isAdmin;
     },
@@ -51,7 +66,16 @@ export const userStore = {
             commit("SET_IS_LOGIN", true);
             commit("SET_IS_LOGIN_ERROR", false);
             commit("SET_IS_VALID_TOKEN", true);
+<<<<<<< HEAD
             commit("SET_USER_INFO", data.data["userName"]);
+=======
+            console.log(data.data["id"]);
+
+            commit("SET_USER_INFO", data.data["userName"], data.data["id"]);
+            commit("SET_USER_ID", data.data["id"]);
+
+            console.log(this.state.userInfo, ">>>>", this.state.userId);
+>>>>>>> 4c706ce4c3ccbfddcd54c9c794e8c6cbea0c47cf
 
             sessionStorage.setItem("access-token", accessToken);
             sessionStorage.setItem("refresh-token", refreshToken);
@@ -146,15 +170,25 @@ export const userStore = {
       await logout(
         userid,
         ({ data }) => {
-          if (data.message === "success") {
+          console.log(data);
+          if (data.error == null) {
             commit("SET_IS_LOGIN", false);
             commit("SET_USER_INFO", null);
             commit("SET_IS_VALID_TOKEN", false);
+<<<<<<< HEAD
 
             //로그아웃한 계정의 정보가 관리자 계정인 경우
             if (this.isAdmin === true) {
               commit("SET_IS_ADMIN", false);
             }
+=======
+            commit("SET_USER_ID", null);
+            commit("SET_IS_LOGIN_ERROR", false);
+            commit("SET_IS_ADMIN", false);
+
+            sessionStorage.removeItem("access-token");
+            sessionStorage.removeItem("refresh-token");
+>>>>>>> 4c706ce4c3ccbfddcd54c9c794e8c6cbea0c47cf
           } else {
             console.log("유저 정보 없음!!!!");
           }
