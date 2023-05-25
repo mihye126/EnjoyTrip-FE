@@ -22,19 +22,6 @@
                   name="id"
                   required=""
                   v-model="user.id"
-                  disabled
-                />
-              </div>
-              <div class="mb-4">
-                <label for="pass">비밀번호</label><br />
-
-                <input
-                  type="text"
-                  class="form-control"
-                  id="pass"
-                  name="pass"
-                  required=""
-                  v-model="user.pw"
                 />
               </div>
               <div class="mb-4">
@@ -49,56 +36,54 @@
                   v-model="user.name"
                 />
               </div>
+              <div class="mb-4">
+                <label for="pass">email</label><br />
+
+                <input
+                  type="text"
+                  class="form-control"
+                  id="pass"
+                  name="pass"
+                  required=""
+                  v-model="user.email"
+                  readonly
+                />
+              </div>
+              <div class="mb-4">
+                <label for="pass">전화번호</label><br />
+
+                <input
+                  type="text"
+                  class="form-control"
+                  id="pass"
+                  name="pass"
+                  required=""
+                  v-model="user.phone"
+                />
+              </div>
+
               <div class="form-group">
                 <div class="col-md-2" style="float: left">
-                  <div class="d-grid">
-                    <button
-                      type="button"
-                      class="btn btn-danger mb-3"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modal-default"
-                      @click="deleteusermodal"
-                    >
-                      탈퇴
-                    </button>
-                  </div>
-                  <div
-                    class="modal fade"
-                    id="modal-default"
-                    tabindex="-1"
-                    aria-labelledby="modal-default"
-                    style="display: none"
-                    aria-hidden="true"
-                    v-if="opendeletemodal == true"
+                  <b-button id="show-btn" @click="showModal" variant="danger" class="col-md-12">
+                    탈퇴</b-button
                   >
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h2 class="h6 modal-title">정말로 탈퇴하시겠습니까?</h2>
-                          <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" @click="delectUser">탈퇴</button>
-                          <button
-                            type="button"
-                            class="btn btn-link ms-auto"
-                            data-bs-dismiss="modal"
-                            @click="opendeletemodal"
-                          >
-                            아니오
-                          </button>
-                        </div>
-                      </div>
+
+                  <b-modal ref="my-modal" hide-footer title="회원 탈퇴">
+                    <div class="d-block text-center">
+                      <h3>정말로 탈퇴하시겠습니까?</h3>
                     </div>
-                  </div>
+                    <div class="text-right">
+                      <b-button class="mt-2" variant="outline-warning" block @click="deleteUser"
+                        >YES </b-button
+                      >&nbsp;
+                      <b-button class="mt-2" variant="outline-danger" block @click="hideModal"
+                        >Close</b-button
+                      >
+                    </div>
+                  </b-modal>
                 </div>
+
                 <button
-                  type="submit"
                   class="btn btn-dark col-md-2"
                   @click.prevent="gotoLoginUpdate"
                   style="float: right"
@@ -115,23 +100,70 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+const userStore = "userStore";
+
 export default {
   data() {
     return {
       user: {
-        id: "test",
-        pw: "wnd",
-        name: "dkq",
+        id: "",
+        name: "",
+        phone: "",
+        email: "",
       },
+      token: "",
       deleteusermodal: false,
     };
   },
+  created() {
+    this.setUserName(),
+      this.setUserToken(),
+      this.setUserID(),
+      this.setUserEmail(),
+      this.setUserPhone();
+  },
+  computed: {
+    ...mapGetters(userStore, ["checkUserName"]),
+    ...mapGetters(userStore, ["checkToken"]),
+    ...mapGetters(userStore, ["checkUserId"]),
+    ...mapGetters(userStore, ["checkUserEmail"]),
+    ...mapGetters(userStore, ["checkUserPhone"]),
+  },
   methods: {
-    gotoLoginUpdate() {},
-    deleteUser() {},
-    opendeletemodal() {
-      if (this.deleteusermodal) this.deleteusermodal = false;
-      else this.deleteusermodal = true;
+    gotoLoginUpdate: async function () {
+      await this.$store.dispatch("userStore/UpdateLoginUser", this.user);
+      this.setUserName(),
+        this.setUserToken(),
+        this.setUserID(),
+        this.setUserEmail(),
+        this.setUserPhone();
+    },
+    deleteUser: async function () {
+      await this.$store.dispatch("userStore/DeleteUser", this.user.email);
+      this.$refs["my-modal"].toggle("#toggle-btn");
+    },
+
+    setUserName: function () {
+      this.user.name = this.checkUserName;
+    },
+    setUserID: function () {
+      this.user.id = this.checkUserId;
+    },
+    setUserPhone: async function () {
+      this.user.phone = this.checkUserPhone;
+    },
+    setUserEmail: async function () {
+      this.user.email = this.checkUserEmail;
+    },
+    setUserToken: function () {
+      this.token = this.checkToken;
+    },
+    hideModal: function () {
+      this.$refs["my-modal"].hide();
+    },
+    showModal: async function () {
+      this.$refs["my-modal"].show();
     },
   },
 };
