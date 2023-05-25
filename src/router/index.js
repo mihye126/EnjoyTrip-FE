@@ -8,7 +8,7 @@ import BlogInputView from "@/views/BlogInputView.vue";
 import TripDetailView from "@/views/TripDetailView.vue";
 import PlanInputView from "@/views/PlanInputView.vue";
 import BlogDetailView from "@/views/BlogDetailView.vue";
-// import TripListView from "@/views/TripListView.vue";
+import TripListView from "@/views/TripListView.vue";
 import NoticeListView from "@/views/NoticeListView.vue";
 import NoticeInsertView from "@/views/NoticeInsertView.vue";
 import UserRegisterView from "@/views/UserRegisterView.vue";

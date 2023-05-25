@@ -1,6 +1,14 @@
 import jwtDecode from "jwt-decode";
 import router from "@/router";
-import { login, findById, tokenRegeneration, logout } from "./userfuntion";
+import {
+  login,
+  findById,
+  tokenRegeneration,
+  logout,
+  updateLoginUser,
+  deleteUser,
+  registerUser,
+} from "./userfuntion";
 
 export const userStore = {
   namespaced: true,
@@ -8,9 +16,15 @@ export const userStore = {
     isLogin: false,
     isLoginError: false,
     userInfo: null,
-    userId: null,
     isValidToken: false,
     isAdmin: false,
+
+    LoginUser: {
+      id: "",
+      userEmail: "",
+      userPhone: "",
+      userName: "",
+    },
   },
   getters: {
     checkUserInfo: function (state) {
@@ -23,7 +37,19 @@ export const userStore = {
       return state.isAdmin;
     },
     checkUserId: function (state) {
-      return state.userId;
+      return state.LoginUser.id;
+    },
+    // checkUserPW: function (state) {
+    //   return state.LoginUser.userPw;
+    // },
+    checkUserEmail: function (state) {
+      return state.LoginUser.userEmail;
+    },
+    checkUserPhone: function (state) {
+      return state.LoginUser.userPhone;
+    },
+    checkUserName: function (state) {
+      return state.LoginUser.userName;
     },
   },
   mutations: {
@@ -39,11 +65,22 @@ export const userStore = {
     SET_USER_INFO: (state, userInfo) => {
       state.userInfo = userInfo;
     },
-    SET_USER_ID: (state, userId) => {
-      state.userId = userId;
-    },
     SET_IS_ADMIN: (state, isAdmin) => {
       state.isAdmin = isAdmin;
+    },
+
+    //추가로 넣은 부분, userID && isAdmin도 loginUser객체로 넣는게 나을려나...?
+    SET_LOGINUSER_ID: (state, userId) => {
+      state.LoginUser.id = userId;
+    },
+    SET_LOGINUSER_NAME: (state, userName) => {
+      state.LoginUser.userName = userName;
+    },
+    SET_LOGINUSER_EMAIL: (state, userEmail) => {
+      state.LoginUser.userEmail = userEmail;
+    },
+    SET_LOGINUSER_PHONE: (state, userPhone) => {
+      state.LoginUser.userPhone = userPhone;
     },
   },
   actions: {
@@ -52,6 +89,7 @@ export const userStore = {
       await login(
         user,
         ({ data }) => {
+          // console.log(data);
           if (data.data != null) {
             console.log("다 된거니??", data);
             let accessToken = data.data["accessToken"];
@@ -60,16 +98,14 @@ export const userStore = {
             commit("SET_IS_LOGIN", true);
             commit("SET_IS_LOGIN_ERROR", false);
             commit("SET_IS_VALID_TOKEN", true);
-            console.log(data.data["id"]);
 
-            commit("SET_USER_INFO", data.data["userName"], data.data["id"]);
-            commit("SET_USER_ID", data.data["id"]);
-
-            console.log(this.state.userInfo, ">>>>", this.state.userId);
+            commit("SET_LOGINUSER_ID", data.data["id"]);
+            commit("SET_LOGINUSER_NAME", data.data["userName"]);
+            commit("SET_LOGINUSER_EMAIL", data.data["userEmail"]);
+            commit("SET_LOGINUSER_PHONE", data.data["userPhone"]);
 
             sessionStorage.setItem("access-token", accessToken);
             sessionStorage.setItem("refresh-token", refreshToken);
-            console.log("관리자니?", data.data["admin"]);
             //관리자 계정인 경우
             if (data.data["admin"] === true) {
               commit("SET_IS_ADMIN", true);
@@ -79,13 +115,11 @@ export const userStore = {
             commit("SET_IS_LOGIN_ERROR", true);
             commit("SET_IS_VALID_TOKEN", false);
             alert("이메일 또는 비번이 틀렸습니다. 다시 입력해주세요");
-            // console.log("아니구나", data);
           }
         },
         (error) => {
           alert("이메일 또는 비번이 틀렸습니다. 다시 입력해주세요");
           console.log(error);
-          // console.log("또 에러인거니?");
         }
       );
     },
@@ -163,11 +197,14 @@ export const userStore = {
           console.log(data);
           if (data.error == null) {
             commit("SET_IS_LOGIN", false);
-            commit("SET_USER_INFO", null);
             commit("SET_IS_VALID_TOKEN", false);
-            commit("SET_USER_ID", null);
             commit("SET_IS_LOGIN_ERROR", false);
             commit("SET_IS_ADMIN", false);
+
+            commit("SET_LOGINUSER_ID", null);
+            commit("SET_LOGINUSER_NAME", null);
+            commit("SET_LOGINUSER_EMAIL", null);
+            commit("SET_LOGINUSER_PHONE", null);
 
             sessionStorage.removeItem("access-token");
             sessionStorage.removeItem("refresh-token");
@@ -180,6 +217,7 @@ export const userStore = {
         }
       );
     },
+
     async UpdateLoginUser({ commit }, user) {
       await updateLoginUser(
         user,
@@ -251,6 +289,5 @@ export const userStore = {
         }
       );
     },
-
   },
 };
