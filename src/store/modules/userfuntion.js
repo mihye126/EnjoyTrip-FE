@@ -18,4 +18,18 @@ async function logout(userid, success, fail) {
   await http.post(`/logout`, userid).then(success).catch(fail);
 }
 
-export { login, findById, tokenRegeneration, logout };
+async function updateLoginUser(user, success, fail) {
+  console.log("update 들어오니?", user, success, fail);
+  // await http.put(`/updateloginuser`, user).then(success).catch(fail);
+}
+
+async function deleteUser(userEmail, success, fail) {
+  console.log("delete 들어오니?", userEmail, success, fail);
+  // await http.delete(`/deleteuser`, userEmail).then(success).catch(fail);
+}
+async function registerUser(user, success, fail) {
+  console.log("register 들어오니?", user, success, fail);
+  // await http.post(`/registeruser`, user).then(success).catch(fail);
+}
+export { login, findById, tokenRegeneration, logout, updateLoginUser, deleteUser, registerUser };
+
