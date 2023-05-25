@@ -1,21 +1,28 @@
-import {  blogAllList, blogCount, deletePost, insertPost, modifyPost, blogFindById } from "./BlogFunction";
+import {
+  blogAllList,
+  blogCount,
+  deletePost,
+  insertPost,
+  modifyPost,
+  blogFindById,
+} from "./BlogFunction";
 
 export const BlogStore = {
   namespaced: true,
   state: {
     posts: [],
-    blogCount:0,
-    post:{}
+    blogCount: 0,
+    post: {},
   },
   getters: {
-    allPosts:function(state){
-      return state.posts
+    allPosts: function (state) {
+      return state.posts;
     },
-    getPost:function(state){
-      return state.post
+    getPost: function (state) {
+      return state.post;
     },
-    getCount:function(state){
-      return state.blogCount
+    getCount: function (state) {
+      return state.blogCount;
     },
   },
   mutations: {
@@ -27,7 +34,7 @@ export const BlogStore = {
     },
     SET_BLOG_COUNT: (state, data) => {
       state.blogCount = data;
-    }
+    },
   },
 
   actions: {
@@ -44,7 +51,8 @@ export const BlogStore = {
       );
     },
     async BlogRead({ commit }, id) {
-      await blogFindById(id,
+      await blogFindById(
+        id,
         ({ data }) => {
           if (data.error == null) {
             commit("SET_BLOG", data.data);
