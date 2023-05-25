@@ -25,7 +25,8 @@ export default new VueRouter({
   routes: [
     { path: "/", component: TripMainView, name: "TripMainView" },
     { path: "/trips", component: TripListView },
-    { path: "/trips?sidocode=:sidocode", component: TripListView },
+    { path: "/trips?sidocode=:sidocode&contentTypeID=:contentTypeID&keyword=:keyword", component: TripListView },
+    { path: "/trips?sidocode=:sidocode&keyword=:keyword", component: TripListView },
     { path: "/login", component: LoginView },
     { path: "/mypage", component: MyPageView },
     { path: "/blogs/new", component: BlogInputView },
