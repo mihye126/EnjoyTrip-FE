@@ -21,7 +21,7 @@
 
           <div class="col">
             <ul class="list-unstyled mb-4">
-              <li class="list-item py-3"><p class="paragraph badge bg-success text-uppercase me-2 px-3">관광지</p></li>
+              <li class="list-item py-3"><p class="paragraph badge bg-success text-uppercase me-2 px-3">{{ contentType[attraction.contentTypeID] }}</p></li>
               <li class="list-item pb-3"><p class="paragraph">{{ attraction.overview }}</p></li>
           </ul>
 
@@ -94,6 +94,16 @@ export default {
       disabled: false,
       sky:{
         1:  require("@/assets/icons/sun.png"),
+      },
+      contentType:{
+        "12":"관광지",
+        "14": "문화시설",
+        "15": "축제공연행사" ,
+        "25":"여행코스" ,
+        "28": "레포츠" ,
+        "32": "숙박" ,
+        "38": "쇼핑" ,
+        "39" :"음식점" ,
       }
     };
   },
@@ -106,6 +116,8 @@ export default {
   methods: {
     setAttraction: function () {
       this.attraction = this.$store.state.tripDetailStore.attraction;
+      console.log("contentType",this.contentType[this.attraction.contentTypeID])
+
     },
     getFormattedLatitude() {
       this.attraction.latitude = parseFloat(this.attraction.latitude).toFixed(2);

@@ -157,6 +157,7 @@ export default {
     initialContent: {
       type: String,
       require:true,
+      default:""
     },
     isJson: {
       type: Boolean,

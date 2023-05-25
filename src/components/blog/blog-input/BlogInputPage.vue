@@ -47,6 +47,7 @@
               'redo',
             ]"
             :initialContent="content"
+            :isEdit="false"
             v-on:update="handleUpdate"
           />
           <div class="row col-lg-9">
@@ -93,16 +94,17 @@ export default {
     updateBlog() {
       //서버로 blog 데이터 보내기
       const blog={
-        content:this.content,
+        content:JSON.stringify(this.content),
         title:this.title,
         userId:this.userId,
         userName:this.userName
       }
+      console.log(blog)
       this.$store.dispatch("BlogStore/InsertPost",blog)
-      this.$router.push("blogs")
+      this.$router.push("/blogs")
     },
     handleUpdate:function(json){
-        this.content=JSON.stringify(json);
+        this.content=json
     },
     setUserID: function () {
       this.userId = this.checkUserId;

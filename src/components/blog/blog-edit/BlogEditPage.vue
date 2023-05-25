@@ -73,7 +73,7 @@
     this.blog=this.$store.state.BlogStore.post
   },methods:{
     handleUpdate:function(json){
-        this.blog.content=this.isJson?JSON.stringify(json):json;
+        this.blog.content=JSON.stringify(json);
     },
       update: async function(){
         console.log("update",this.blog)
