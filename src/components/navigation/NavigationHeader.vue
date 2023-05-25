@@ -44,6 +44,10 @@
             <li class="nav-item">
               <router-link to="/blogs" class="nav-link">Blog</router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/recommend" class="nav-link icon-lg"> <i class="fa-solid fa-robot"></i></router-link>
+            </li>
+
           </ul>
         </div>
         <div class="d-flex align-items-center">

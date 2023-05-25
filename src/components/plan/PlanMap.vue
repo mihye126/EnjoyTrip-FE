@@ -1,25 +1,26 @@
 <template>
     <div>
-        <div id="map" ></div>
+        <div id="map"></div>
     </div>
 </template>
   
 <script>
-import { mapState } from "vuex";
+// import { mapState } from "vuex";
 
 export default {
+    props: {
+        trips: Array
+    },
     data() {
         return {
             markers: [],
             infowindow: null,
-            map:null,
-            
+            map: null,
         };
     },
-    created(){
-        // this.trips=this.$store.state.trips
+    created() {
     },
-    mounted(){
+    mounted() {
         if (window.kakao && window.kakao.maps) {
             this.initMap();
         } else {
@@ -30,8 +31,12 @@ export default {
                 "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=9aec3b964ed8614de3ec88c7cd3be6ce";
             document.head.appendChild(script);
         }
+    }, watch: {
+        trips:function() {
+            console.log('변경 감지');
+            this.initMap()
+        }
     },
-    
     methods: {
         initMap() {
             const container = document.getElementById("map");
@@ -43,23 +48,23 @@ export default {
             //지도 객체를 등록합니다.
             //지도 객체는 반응형 관리 대상이 아니므로 initMap에서 선언합니다.
             this.map = new kakao.maps.Map(container, options);
-        // 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
-        const linePath = [];
+            // 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
+            const linePath = [];
 
-        this.trips.forEach(trip =>{
-            linePath.push(new kakao.maps.LatLng(trip.latitude, trip.longitude))
-        })
+            this.trips.forEach(trip => {
+                linePath.push(new kakao.maps.LatLng(trip.latitude, trip.longitude))
+            })
 
-        // 지도에 표시할 선을 생성합니다
-        const polyline = new kakao.maps.Polyline({
-            path: linePath, // 선을 구성하는 좌표배열 입니다
-            strokeWeight: 5, // 선의 두께 입니다
-            strokeColor: '#ff0000', // 선의 색깔입니다
-            strokeOpacity: 0.9, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-            strokeStyle: 'solid' // 선의 스타일입니다
-        });
-        polyline.setMap(this.map);  
-        this.displayMarker(linePath);
+            // 지도에 표시할 선을 생성합니다
+            const polyline = new kakao.maps.Polyline({
+                path: linePath, // 선을 구성하는 좌표배열 입니다
+                strokeWeight: 5, // 선의 두께 입니다
+                strokeColor: '#ff0000', // 선의 색깔입니다
+                strokeOpacity: 0.9, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+                strokeStyle: 'solid' // 선의 스타일입니다
+            });
+            polyline.setMap(this.map);
+            this.displayMarker(linePath);
         },
 
         displayMarker(positions) {
@@ -104,10 +109,7 @@ export default {
 
             this.map.setCenter(iwPosition);
         },
-    }, 
-     computed: {
-    ...mapState("planStore", ["trips"])
-  },
+    },
 };
 </script>
   

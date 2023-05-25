@@ -15,6 +15,7 @@ async function deletePost(id, success, fail) {
   await http.delete(`/blogs/${id}`).then(success).catch(fail);
 }
 async function insertPost(post, success, fail) {
+  console.log("insert",post)
   await http.post(`/blogs`, post).then(success).catch(fail);
 }
 async function modifyPost(post, success, fail) {

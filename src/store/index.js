@@ -2,7 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import { userStore } from "./modules/user/userStore";
 import { tripDetailStore } from "./modules/trip/tripDetailStore";
-import { planStore } from "./modules/plan/planStore";
+// import { planStore } from "./modules/plan/PlanStore";
 import { NoticeStore } from "./modules/notice/NoticeStore";
 import { BlogStore } from "./modules/blog/BlogStore";
 import { TripSerchStore } from "./modules/trip_serch/TripSerchStore";
@@ -17,7 +17,7 @@ export const store = new Vuex.Store({
   modules: {
     userStore,
     tripDetailStore,
-    planStore,
+    // planStore,
     NoticeStore,
     BlogStore,
     TripSerchStore,

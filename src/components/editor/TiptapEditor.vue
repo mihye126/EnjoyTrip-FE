@@ -157,9 +157,12 @@ export default {
     initialContent: {
       type: String,
       require:true,
-      default: '',
     },
     isJson: {
+      type: Boolean,
+      default: false,
+    },
+    isEdit: {
       type: Boolean,
       default: false,
     },
@@ -209,10 +212,19 @@ export default {
       json: '',
       editor: null,
     };
+  },computed:{
+    content:function(){
+      return this.initialContent
+    }
+  },watch:{
+    content:function(value){
+      this.editor.commands.setContent(this.isJson?JSON.parse(value):value)
+    }
   },
-  created() {
-    this.editor = new Editor({
-      content: this.isJson?JSON.parse(this.initialContent):this.initialContent,
+   mounted() {
+    console.log("content",this.initialContent)
+    this.editor =  new Editor({
+      content: this.isEdit?JSON.parse(this.initialContent):this.initialContent,
       extensions: [StarterKit, Underline],
     });
     this.editor.setOptions({editable: this.editable});

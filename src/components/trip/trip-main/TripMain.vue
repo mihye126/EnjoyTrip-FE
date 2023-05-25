@@ -1,9 +1,7 @@
 <template>
   <div>
     <!-- Hero -->
-    <section
-      class="section-header overflow-hidden mt-5 pt-7 pt-lg-8 pb-9 pb-lg-12 bg-img text-white"
-    >
+    <section class="section-header overflow-hidden mt-5 pt-7 pt-lg-8 pb-9 pb-lg-12 bg-img text-white">
       <div class="container">
         <div class="row">
           <div class="col-12 text-center">
@@ -74,18 +72,14 @@
       <div class="container">
         <div class="row mb-5">
           <div class="col-6 col-lg-3 mb-5" v-for="(category, index) in categories" :key="index">
-            <router-link to="" target="_blank" class="page-preview scale-up-hover-2">
-              <img
-                class="shadow-lg rounded scale"
-                :src="`${category.img}`"
-                :alt="`${category.name}`"
-              />
+            <div @click="search(category.code, 12)" class="page-preview scale-up-hover-2">
+              <img class="shadow-lg rounded scale" :src="`${category.img}`" :alt="`${category.name}`" />
               <div class="text-center show-on-hover">
                 <h3 class="h6 m-0 text-center text-white">
                   {{ category.name }}<span class="fas fa-external-link-alt ms-2"></span>
                 </h3>
               </div>
-            </router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -103,7 +97,7 @@
                 Get started building your project using a collection of over 1000 premium web
                 components such as buttons, alerts, cards, modals, and many more
               </p>
-              <router-link to="" class="btn btn-warning mt-2 animate-up-2">
+              <router-link to="/trips" class="btn btn-warning mt-2 animate-up-2">
                 Show More
                 <span class="me-1">
                   <i class="fa-solid fa-angles-right"></i>
@@ -111,22 +105,19 @@
               </router-link>
             </div>
             <div class="col-lg-6 order-lg-1">
-              <img
-                src="@/assets/img/sections/about-us-1.jpg"
-                alt="MapBox Leaflet.js Custom Integration Mockup"
-              />
+              <img src="@/assets/img/sections/about-us-1.jpg" alt="MapBox Leaflet.js Custom Integration Mockup" />
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section section-sm pb-0 mb-n4">
+    <!-- <section class="section section-sm pb-0 mb-n4">
       <div class="container">
         <div class="row justify-content-center">
           <h3 class="text-center">어떤곳을 원하나요?</h3>
 
-          <!-- Using modifiers -->
+          Using modifiers
           <div class="accordion m-4" role="tablist">
             <b-button
               v-for="(product, index) in products"
@@ -140,7 +131,7 @@
               role="tab"
               >{{ product.name }}</b-button
             >
-            <!-- Element to collapse -->
+            Element to collapse
             <b-collapse
               v-for="(product, index) in products"
               :key="index"
@@ -157,17 +148,16 @@
 
         <div></div>
       </div>
-    </section>
+    </section> -->
     <!-- End of Section -->
   </div>
 </template>
 
 <script>
-import { RouterLink } from "vue-router";
 import TripSearch from "./TripSearch.vue";
 // import http from "@/router/axios-common.js";
 export default {
-  created() {},
+  created() { },
   data() {
     return {
       categories: [
@@ -225,10 +215,24 @@ export default {
       ],
     };
   },
-  methods: {},
+  methods: {
+    search: async function (sidoCode, contentTypeID) {
+      const param1 = sidoCode;
+      const param2 = contentTypeID;
+      const param3 = "";
+
+      this.$router.push({
+        name: "TripSerchView",
+        params: {
+          param1,
+          param2,
+          param3,
+        },
+      });
+    },
+  },
   components: {
     TripSearch,
-    RouterLink,
   },
 };
 </script>

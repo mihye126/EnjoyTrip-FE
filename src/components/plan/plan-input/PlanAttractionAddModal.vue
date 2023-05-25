@@ -3,9 +3,9 @@
 </template>
 
 <script>
-import TripSearchVue from '@/components/trip/TripSearch.vue';
+import TripSearchVue from '@/components/trip/trip-main/TripSearch.vue.js';
 // import http from "@/router/axios-common.js";
-import { mapState, mapActions } from "vuex";
+// import { mapState, mapActions } from "vuex";
 
 export default {
     components: {
@@ -18,16 +18,16 @@ export default {
             rows:0
         }
     },mounted(){
-        this.rows=this.$store.dispatch() // 전체 갯수 가져오기
+        // this.rows=this.$store.dispatch() // 전체 갯수 가져오기
     },
     computed: {
-        ...mapState("planStore", ["trips", "trip_ids"]),
+        // ...mapState("planStore", ["trips", "trip_ids"]),
         rows() {
         return this.items.length
       }
     },
     methods: {
-        ...mapActions("planStore", ["GET_TRIP_INFO"])
+        // ...mapActions("planStore", ["GET_TRIP_INFO"])
     }, mounted() {
         this.GET_TRIP_INFO()
     }

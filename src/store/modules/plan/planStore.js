@@ -1,32 +1,59 @@
-import {findById} from "./planFunctions";
+import { TripSerchAllList, endPageNum } from "./TripSerchFuntion";
 
-export const planStore = {
+export const TripSerchStore = {
   namespaced: true,
   state: {
-    trips: [],
-    trip_ids: [125266, 125405, 125406, 125407, 125408]
+    TripSerch: [],
+    endPage: 0,
+    endIdx: 0,
+    input:{},
   },
-  getters: {
-    GET_TRIPS: function (state) {
-      return state.trips;
-    },
-  },
+  getters: {},
   mutations: {
-    ADD_TRIP_INFO(state, trip) {
-        state.trips.push(trip);
-      },
+    SET_TripSerch: (state, data) => {
+      state.TripSerch = data;
+    },
+    SET_ENDPAGENUM: (state, data) => {
+      state.endIdx = data.count;
+      state.endPage = parseInt(state.endIdx / 10 + 1);
+    },
+    SET_INPUT:(state,data)=>{
+      state.input = data;
+    }
   },
-  actions: {
-    GET_TRIP_INFO: async ({ state, commit }) => {
-        state.trips = []; // 액션이 호출될 때마다 state.trips를 비워줌
-  
-        for (const tripId of state.trip_ids) {
-          const trip = await findById(tripId);
-          commit("ADD_TRIP_INFO", trip);
-        }
-  
-        console.log("trips", state.trips);
-      },
 
+  actions: {
+    async TripSerchList({ commit }, input) {
+      await TripSerchAllList(
+        input.sidoCode,
+        input.contentTypeId,
+        input.keyword,
+        (input.page - 1) * 10,
+        ({ data }) => {
+          console.log(data);
+          if (data.error == null) {
+            commit("SET_TripSerch", data.data);
+          }
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    },
+    async EndPageNum({ commit }, input) {
+      await endPageNum(
+        input.sidoCode,
+        input.contentTypeId,
+        input.keyword,
+        ({ data }) => {
+          if (data.error == null) {
+            commit("SET_ENDPAGENUM", data.data);
+          }
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    },
   },
 };

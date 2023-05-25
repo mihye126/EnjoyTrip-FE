@@ -39,6 +39,7 @@
             ]" 
             :initialContent="blog.content"
             :isJson="true"
+            :isEdit="true"
             v-on:update="handleUpdate"
             />
             <div class="row col-lg-9">
@@ -72,7 +73,7 @@
     this.blog=this.$store.state.BlogStore.post
   },methods:{
     handleUpdate:function(json){
-        this.blog.content=JSON.stringify(json);
+        this.blog.content=this.isJson?JSON.stringify(json):json;
     },
       update: async function(){
         console.log("update",this.blog)

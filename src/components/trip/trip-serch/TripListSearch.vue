@@ -63,7 +63,7 @@
       </div>
     </div>
     <div class="col-2">
-      <button class="btn btn-warning" id="btn-search" @click.prevent="serch" style="width: 100%">
+      <button class="btn btn-warning" id="btn-search" @click.prevent="search" style="width: 100%">
         Search <i class="fa-solid fa-magnifying-glass m-1" style="float: left"></i>
       </button>
     </div>
@@ -111,7 +111,7 @@ export default {
   },
 
   methods: {
-    serch: async function () {
+    search: async function () {
       console.log(this.selectSido);
       const input={
         sidoCode:this.selectSido,

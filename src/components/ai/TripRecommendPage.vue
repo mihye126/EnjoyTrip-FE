@@ -10,30 +10,71 @@
       </div>
     </section>
 
-    <section class="section section-lg pt-6">
+    <div class="section section-md pt-4 mt-3">
       <div class="container">
-        <div class="row justify-content-center mb-5 mb-lg-6">
-          <div class="col-12 col-lg-8">
-            <div class="card border-0 p-2 p-md-3 p-lg-5">
-              <div class="card-body px-0 pt-0">
-                <div>
-                  <label for="days">days:</label>
-                  <input v-model="days" type="text" id="days">
-                  <label for="city">city:</label>
-                  <input v-model="city" type="text" id="city">
-                  <button @click="run">요청</button>
-                </div>
-                <div>
-                  <h3>모델 응답:</h3>
-                  <textarea type="text" id="modelResponse" :value="modelResponse"></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
+          <form class="row mb-4 mb-lg-5 pt-2" action="" method="get">
+    <div class="col-5">
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-text">   <label class="my-1 me-2">days</label> <i class="fa-solid fa-calendar-days"></i></span>
+          <select
+            class="form-select"
+            id="search-area"
+            aria-label="검색 할 지역 선택"
+            name="sidoCode"
+            v-model="days"
+          >
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+
+          </select>
         </div>
       </div>
-    </section>
+    </div>
 
+    <div class="col-5">
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-text" id="basic-addonDate1">
+            <label class="my-1 me-2">city</label>  <i class="fa-solid fa-location-dot"></i>          
+          </span>
+          <input
+            class="form-control"
+            id="search-city"
+            aria-label="검색 할 지역 선택"
+            name="city"
+            v-model="city"
+          />
+            
+        </div>
+      </div>
+    </div>
+
+    <div class="col-2">
+      <button class="btn btn-warning" id="btn-search" @click.prevent="run" style="width: 100%">
+        Search <i class="fa-solid fa-magnifying-glass m-1" style="float: left"></i>
+      </button>
+    </div>
+  </form>
+        <div class="row mb-4 mb-lg-5">
+
+          <tiptap-editor
+            class="col-lg-9 p-0"
+            :active-buttons="[]"
+            :initialContent="modelResponse"
+            :editable="false"
+            :border="false"
+            :isJson="false"
+          />      
+        </div>
+
+      </div>
+    </div>
 
   </main>
 </template>
@@ -43,13 +84,17 @@ import {
   createCompletion,
   createClient
 } from '@/api/chatgpt.js';
+import TiptapEditor from '../editor/TiptapEditor.vue';
 
 export default {
+  components: {
+    TiptapEditor
+  },
   data() {
     return {
       modelResponse: '',
-      days: 0,
-      city: ""
+      days: 1,
+      city: "서울"
     };
   },
   methods: {

@@ -66,6 +66,14 @@
                   >
                     <i class="fa-solid fa-pen"></i>
                   </button>
+                  <button
+                    v-if="this.blog.userId === this.userId"
+                    class="btn btn-sm me-2 btn-icon-only btn-pill d-inline btn-danger"
+                    aria-label="edit"
+                    @click="deleteblog"
+                  >
+                  <i class="fa-solid fa-trash"></i>                  
+                </button>
                 </div>
               </div>
             </div>
@@ -114,7 +122,13 @@ export default {
       this.userId = this.checkUserId;
     },
     editblog: function () {
-      console.log("hihihi");
+      const id = this.$route.params.id; // id를 가져오기 위해 $route.params.id를 사용합니다.
+      this.$router.push("/blogs/edit/"+id)
+    },
+    deleteblog: function () {
+      const id = this.$route.params.id; // id를 가져오기 위해 $route.params.id를 사용합니다.
+      this.$store.dispatch("BlogStore/DeletePost",id)
+      this.$router.push("/blogs")
     },
   },
 };

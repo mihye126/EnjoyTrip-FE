@@ -65,7 +65,7 @@ export default {
     insert: async function () {
       console.log("<>", this.notice);
       await this.$store.dispatch("NoticeStore/InsertItem", this.notice);
-      this.$router.push("/notice/list");
+      this.$router.push("/notice");
     },
   },
 };

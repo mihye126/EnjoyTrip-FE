@@ -23,6 +23,7 @@
                 id="title"
                 required=""
                 name="title"
+                v-model="title"
               />
             </div>
           </div>
@@ -46,6 +47,7 @@
               'redo',
             ]"
             :initialContent="content"
+            v-on:update="handleUpdate"
           />
           <div class="row col-lg-9">
             <div class="col-6 mb-4 text-start">
@@ -75,6 +77,7 @@ export default {
       userName: null,
       editor: null,
       title: "",
+      content:""
     };
   },
   async created() {
@@ -89,6 +92,17 @@ export default {
   methods: {
     updateBlog() {
       //서버로 blog 데이터 보내기
+      const blog={
+        content:this.content,
+        title:this.title,
+        userId:this.userId,
+        userName:this.userName
+      }
+      this.$store.dispatch("BlogStore/InsertPost",blog)
+      this.$router.push("blogs")
+    },
+    handleUpdate:function(json){
+        this.content=JSON.stringify(json);
     },
     setUserID: function () {
       this.userId = this.checkUserId;

@@ -75,13 +75,13 @@ export const BlogStore = {
         }
       );
     },
-    async DeletePost({ commit }, id) {
+    async DeletePost({ dispatch }, id) {
       await deletePost(
         id,
         ({ data }) => {
           console.log(data);
           if (data.error == null) {
-            commit("SET_BLOG_ALL", data.data);
+            dispatch('blogAllList')
           }
         },
         (err) => {
@@ -90,13 +90,13 @@ export const BlogStore = {
       );
     },
 
-    async InsertPost({ commit }, blog) {
+    async InsertPost({ dispatch }, blog) {
       await insertPost(
         blog,
         ({ data }) => {
           console.log(data);
           if (data.error == null) {
-            commit("SET_BLOG_ALL", data.data);
+            dispatch('blogAllList')
           }
         },
         (err) => {
