@@ -8,7 +8,6 @@ import BlogInputView from "@/views/BlogInputView.vue";
 import TripDetailView from "@/views/TripDetailView.vue";
 import PlanInputView from "@/views/PlanInputView.vue";
 import BlogDetailView from "@/views/BlogDetailView.vue";
-import TripListView from "@/views/TripListView.vue";
 import NoticeListView from "@/views/NoticeListView.vue";
 import NoticeInsertView from "@/views/NoticeInsertView.vue";
 import UserRegisterView from "@/views/UserRegisterView.vue";
@@ -29,11 +28,7 @@ export default new VueRouter({
   mode: "history",
   routes: [
     { path: "/", component: TripMainView, name: "TripMainView" },
-    { path: "/trips", component: TripListView },
-    { path: "/trips?sidocode=:sidocode&contentTypeID=:contentTypeID&keyword=:keyword", component: TripListView },
-    { path: "/trips?sidocode=:sidocode&keyword=:keyword", component: TripListView },
-    // { path: "/trips", component: TripListView },
-    // { path: "/trips?sidocode=:sidocode", component: TripListView },
+    { path: "/trips",component: TripSerchView,name: "TripSerchView",},
     { path: "/login", component: LoginView },
     { path: "/mypage", component: MyPageView },
     { path: "/blogs", component: BlogListView },
@@ -42,15 +37,10 @@ export default new VueRouter({
     { path: "/trips/:contentID", component: TripDetailView },
     { path: "/plans/new", component: PlanInputView },
     { path: "/blogs/:id", component: BlogDetailView },
-    { path: "/notice/list", component: NoticeListView },
+    { path: "/notice", component: NoticeListView },
     { path: "/notice/insert", component: NoticeInsertView },
     { path: "/register", component: UserRegisterView },
     {path:"/recommend",component: TripRecommendView},
-    {
-      path: "/trips/serch",
-      component: TripSerchView,
-      name: "TripSerchView",
-    },
 
     {path:"/:error",component: ErrorView},
 

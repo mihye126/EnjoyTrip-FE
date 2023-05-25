@@ -1,5 +1,5 @@
 <template>
-  <div class="card shadow px-4 py-1 mb-6">
+  <div class="card shadow px-4 py-1 mb-2">
     <div class="card-body text-center text-md-left">
       <div class="row align-items-center">
         <div class="col-12 col-md-3 mt-4 mt-md-0 text-md-right">

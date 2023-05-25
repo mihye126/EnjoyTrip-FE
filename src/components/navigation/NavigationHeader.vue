@@ -8,8 +8,8 @@
       <div class="container position-relative">
         <router-link class="navbar-brand me-lg-5" to="/">
           <div>
-            <img class="navbar-brand-dark" src="/assets/img/brand/light.svg" alt="Logo light" />
-            <img class="navbar-brand-light" src="/assets/img/brand/dark.svg" alt="Logo dark" />
+            <img class="navbar-brand-dark" :src="lightLogo" alt="Logo light" />
+            <img class="navbar-brand-light" :src="darkLogo" alt="Logo dark" />
           </div>
         </router-link>
         <div class="navbar-collapse collapse me-auto" id="navbar_global">
@@ -17,7 +17,7 @@
             <div class="row">
               <div class="col-6 collapse-brand">
                 <router-link to="/trips">
-                  <img src="/assets/img/brand/dark.svg" alt="Themesberg logo" />
+                  <img :src="darkLogo" alt="Themesberg logo" />
                 </router-link>
               </div>
               <div class="col-6 collapse-close">
@@ -36,10 +36,10 @@
           </div>
           <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
             <li class="nav-item">
-              <router-link to="/notice/list" class="nav-link">Notice</router-link>
+              <router-link to="/notice" class="nav-link">Notice</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/trips/list" class="nav-link">Trips</router-link>
+              <router-link to="/trips" class="nav-link">Trips</router-link>
             </li>
             <li class="nav-item">
               <router-link to="/blogs" class="nav-link">Blog</router-link>
@@ -109,6 +109,9 @@ export default {
       userName: "",
       userId: "",
       token: "",
+      lightLogo:require("@/assets/img/brand/light.svg"),
+      darkLogo:require("@/assets/img/brand/dark.svg")
+
     };
   },
   created() {

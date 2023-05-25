@@ -1,15 +1,15 @@
 <template>
   <!-- Hero -->
-  <section class="section-header">
-    <div class="container">
+ <main>
       <!-- 게시판 시작-->
-      <TripSearch></TripSearch>
-      <section class="section-header overflow-hidden pb-0 my-5">
+      <section class="section-header overflow-hidden pb-0 my-3">
         <div class="container">
           <div class="row">
             <div class="col-12 text-center">
               <h1 class="display-2 mb-3">어디로 떠나고 싶나요?</h1>
               <p>여행을 떠나요</p>
+              <TripSearch></TripSearch>
+
             </div>
           </div>
         </div>
@@ -30,12 +30,8 @@
               ></TripSearchItem>
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- <div class="section section-md pt-4 mt-3"></div> -->
-
-      <div style="display: flex; justify-content: center">
+          <div class="row">
+            <div style="display: flex; justify-content: center">
         <b-button-toolbar key-nav aria-label="Toolbar with button groups">
           <b-button-group class="mx-1">
             <b-button @click="gotoFrist">&laquo;</b-button>
@@ -50,8 +46,14 @@
           </b-button-group>
         </b-button-toolbar>
       </div>
-    </div>
-  </section>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="section section-md pt-4 mt-3"></div> -->
+
+
+</main>
 </template>
 
 <script>
