@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <navigation-header></navigation-header>
-    <TripSearch></TripSearch>
+    <!-- <TripSearch></TripSearch> -->
     <TripSerchList></TripSerchList>
     <navigation-footer></navigation-footer>
   </div>
@@ -9,7 +9,7 @@
 
 <script>
 // @ is an alias to /src
-import TripSearch from "@/components/trip/TripSearch.vue";
+// import TripSearch from "@/components/trip/TripSearch.vue";
 import TripSerchList from "@/components/trip/trip-serch/TripSerchList.vue";
 import NavigationFooter from "@/components/navigation/NavigationFooter.vue";
 import NavigationHeader from "@/components/navigation/NavigationHeader.vue";
@@ -17,7 +17,7 @@ import NavigationHeader from "@/components/navigation/NavigationHeader.vue";
 export default {
   name: "TripSearchView",
   components: {
-    TripSearch,
+    // TripSearch,
     NavigationFooter,
     NavigationHeader,
     TripSerchList,
