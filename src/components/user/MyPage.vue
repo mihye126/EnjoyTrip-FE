@@ -22,6 +22,7 @@
                   name="id"
                   required=""
                   v-model="user.id"
+                  readonly
                 />
               </div>
               <div class="mb-4">
@@ -33,7 +34,7 @@
                   id="InfoName"
                   required=""
                   name="username"
-                  v-model="user.name"
+                  v-model="user.user_name"
                 />
               </div>
               <div class="mb-4">
@@ -45,7 +46,7 @@
                   id="pass"
                   name="pass"
                   required=""
-                  v-model="user.email"
+                  v-model="user.user_email"
                   readonly
                 />
               </div>
@@ -58,7 +59,7 @@
                   id="pass"
                   name="pass"
                   required=""
-                  v-model="user.phone"
+                  v-model="user.user_phone"
                 />
               </div>
 
@@ -108,9 +109,9 @@ export default {
     return {
       user: {
         id: "",
-        name: "",
-        phone: "",
-        email: "",
+        user_name: "",
+        user_phone: "",
+        user_email: "",
       },
       token: "",
       deleteusermodal: false,
@@ -134,27 +135,28 @@ export default {
     gotoLoginUpdate: async function () {
       await this.$store.dispatch("userStore/UpdateLoginUser", this.user);
       this.setUserName(),
-        this.setUserToken(),
-        this.setUserID(),
-        this.setUserEmail(),
-        this.setUserPhone();
+        // this.setUserToken(),
+        // this.setUserID(),
+        // this.setUserEmail(),
+        this.setUserPhone(),
+        console.log(this.user);
     },
     deleteUser: async function () {
-      await this.$store.dispatch("userStore/DeleteUser", this.user.email);
+      await this.$store.dispatch("userStore/DeleteUser", this.user.id);
       this.$refs["my-modal"].toggle("#toggle-btn");
     },
 
     setUserName: function () {
-      this.user.name = this.checkUserName;
+      this.user.user_name = this.checkUserName;
     },
     setUserID: function () {
       this.user.id = this.checkUserId;
     },
     setUserPhone: async function () {
-      this.user.phone = this.checkUserPhone;
+      this.user.user_phone = this.checkUserPhone;
     },
     setUserEmail: async function () {
-      this.user.email = this.checkUserEmail;
+      this.user.user_email = this.checkUserEmail;
     },
     setUserToken: function () {
       this.token = this.checkToken;

@@ -227,10 +227,10 @@ export const userStore = {
             let accessToken = data.data["accessToken"];
             let refreshToken = data.data["refreshToken"];
 
-            commit("SET_LOGINUSER_ID", data.data["id"]);
-            commit("SET_LOGINUSER_NAME", data.data["userName"]);
-            commit("SET_LOGINUSER_EMAIL", data.data["userEmail"]);
-            commit("SET_LOGINUSER_PHONE", data.data["userPhone"]);
+            // commit("SET_LOGINUSER_ID", data.data["id"]);
+            commit("SET_LOGINUSER_NAME", user.user_name);
+            // commit("SET_LOGINUSER_EMAIL", data.data["userEmail"]);
+            commit("SET_LOGINUSER_PHONE", user.user_phone);
 
             sessionStorage.setItem("access-token", accessToken);
             sessionStorage.setItem("refresh-token", refreshToken);
@@ -243,9 +243,9 @@ export const userStore = {
         }
       );
     },
-    async DeleteUser({ commit }, userEmail) {
+    async DeleteUser({ commit }, id) {
       await deleteUser(
-        userEmail,
+        id,
         ({ data }) => {
           console.log(data);
           if (data.error == null) {
@@ -261,6 +261,7 @@ export const userStore = {
 
             sessionStorage.removeItem("access-token");
             sessionStorage.removeItem("refresh-token");
+            router.push("/");
           } else {
             console.log("유저 탈퇴 실패!!!");
           }
@@ -274,15 +275,17 @@ export const userStore = {
       await registerUser(
         user,
         ({ data }) => {
-          console.log(data, commit);
-          if (data.error == null) {
+          console.log(commit);
+          if (data.data != null) {
             alert("회원가입이 완료되었습니다. 로그인 후에 이용해주세요");
+            router.push("/");
           } else {
-            console.log("회원가입 실패!!!");
+            alert("회원가입에 실패하였습니다. 정보를 다시 입력해주세요");
+            console.log("회원가입 실패!!!", data.data, "@@@", data.error);
           }
         },
         (error) => {
-          console.log(error);
+          console.log("WWW", error);
         }
       );
     },

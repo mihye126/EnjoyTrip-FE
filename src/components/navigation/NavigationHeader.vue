@@ -114,6 +114,11 @@ export default {
   created() {
     this.setUserName(), this.setUserToken(), this.setUserID();
   },
+  watch: {
+    checkToken() {
+      this.setUserToken();
+    },
+  },
   computed: {
     ...mapGetters(userStore, ["checkUserName"]),
     ...mapGetters(userStore, ["checkToken"]),
@@ -131,10 +136,10 @@ export default {
     },
     logout: async function () {
       await this.$store.dispatch("userStore/userLogout", this.userId);
-      this.$router.push("/");
+      this.$router.push("/").catch(() => {});
     },
     mypage: async function () {
-      this.$router.push("/mypage");
+      this.$router.push("/mypage").catch(() => {});
     },
   },
 };

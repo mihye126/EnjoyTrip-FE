@@ -127,7 +127,7 @@ export default {
       //
       if (this.isLogin) {
         // await this.getUserInfo(token);
-        this.$router.push("/trips"); //메인 페이지로 이동
+        this.$router.push("/"); //메인 페이지로 이동
       }
     },
     movePage() {
