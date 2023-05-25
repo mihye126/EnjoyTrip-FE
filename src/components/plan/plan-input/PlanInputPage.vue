@@ -29,7 +29,8 @@
                             <plan-map v-model=trips></plan-map>
                         </div>
                         <div class="col-lg-4">
-                            <draggable v-model="trips" group="people" @start="drag = true" @end="drag = false">
+                            <draggable v-model="trips" group="people" @start="drag = true" @end="drag = false"
+                                :move="checkMove">
 
                                 <div class="card " v-for="trip in trips" :key="trip.content_id">
                                     <div class="card-body px-3 py-3 text-center text-md-left">
@@ -44,32 +45,24 @@
                                 </div>
                             </draggable>
 
-                            <b-button  v-b-modal="'modal-default'"  class="card">
-                                <div class="card-body px-3 py-3 text-center text-md-left ">
-                                    <div class="d-flex justify-content-center">
-                                        <div class=" btn-icon"><i class="fa-solid fa-plus"></i></div>
-                                    </div>
-                                </div>
+                            <div class="d-flex justify-content-center my-2">
+                                <b-button v-b-modal.modal-1 variant="white" class="border"> <i
+                                        class="fa-solid fa-plus"></i></b-button>
 
-                            </b-button>
+                                <b-modal id="modal-1" title="여행지 추가하기">
+                                    <div class=" d-flex justify-content-center">
+                                        <div class="modal-body">
 
-                            <b-modal class="modal" id="modal-default" aria-labelledby="modal-default">
-                                <div class="modal-body">
-                                            <p>With less than a month to go before the European Union enacts new consumer
-                                                privacy laws for its citizens, companies around the world are updating their
-                                                terms of service agreements to comply.</p>
-                                            <p>The European Union’s General Data Protection Regulation (G.D.P.R.) goes into
-                                                effect on May 25 and is meant to ensure a common set of data rights in the
-                                                European Union. It requires organizations to notify users as soon as
-                                                possible of high-risk data breaches that could personally affect them.</p>
                                         </div>
-                            </b-modal>
+                                    </div>
+                                </b-modal>
+                            </div>
                         </div>
 
                     </div>
                     <div class="row">
 
-                        <button type="submit" class="btn rounded btn-secondary" @click="updateBlog">저장하기</button>
+                        <button type="submit" class="btn rounded btn-secondary">저장하기</button>
                     </div>
 
                 </div>
@@ -93,8 +86,17 @@ export default {
         ...mapState("planStore", ["trips", "trip_ids"]),
     },
     methods: {
-        ...mapActions("planStore", ["GET_TRIP_INFO"])
-    },mounted(){
+        ...mapActions("planStore", ["GET_TRIP_INFO"]),
+        add: function () {
+            this.list.push({ name: "Juan " });
+        },
+        replace: function () {
+            this.list = [{ name: "Edgard"}];
+        },
+        checkMove: function (e) {
+            window.console.log("Future index: " + e.draggedContext.futureIndex);
+        }
+    }, mounted() {
         this.GET_TRIP_INFO()
     }
 };
@@ -129,4 +131,5 @@ export default {
 .del {
     cursor: pointer;
     color: red;
-}</style>
+}
+</style>

@@ -12,6 +12,10 @@ import TripListView from "@/views/TripListView.vue";
 import NoticeListView from "@/views/NoticeListView.vue";
 import NoticeInsertView from "@/views/NoticeInsertView.vue";
 import UserRegisterView from "@/views/UserRegisterView.vue";
+import TripRecommendView from "@/views/TripRecommendView.vue";
+import BlogEditView from "@/views/BlogEditView.vue";
+import BlogListView from "@/views/BlogListView.vue";
+
 
 Vue.use(VueRouter);
 
@@ -29,13 +33,16 @@ export default new VueRouter({
     { path: "/trips?sidocode=:sidocode&keyword=:keyword", component: TripListView },
     { path: "/login", component: LoginView },
     { path: "/mypage", component: MyPageView },
+    { path: "/blogs", component: BlogListView },
     { path: "/blogs/new", component: BlogInputView },
+    { path: "/blogs/edit/:id", component: BlogEditView },
     { path: "/trips/:contentID", component: TripDetailView },
     { path: "/plans/new", component: PlanInputView },
-    { path: "/blogs/1", component: BlogDetailView },
+    { path: "/blogs/:id", component: BlogDetailView },
     { path: "/notice/list", component: NoticeListView },
     { path: "/notice/insert", component: NoticeInsertView },
     { path: "/register", component: UserRegisterView },
+    {path:"/recommend",component: TripRecommendView}
 
     /* { path: "/modify/:no", component: TodoModify },
 		{ path: "/deleteAll", component: TodoModify },  */

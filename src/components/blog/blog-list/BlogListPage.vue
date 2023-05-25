@@ -6,33 +6,22 @@
   <div class="container">
     <div class="row justify-content-between align-items-center">
       <div class="col-12 col-lg-7">
-        <h1 class="display-1 font-weight-extreme mb-4">Share Your Hot Place</h1>
+        <h1 class="display-1 font-weight-extreme mb-4">Share Your Experience</h1>
         <p class="lead mb-4 mb-lg-5 me-lg-5">
-          당신만의 특별한 여행을 공유하세요!
+          당신만의 특별한 경험을 공유하세요!
         </p>
-        <a class="btn btn-warning" href="/hotPlace/insert">Post   <i class="fa-solid fa-plus ms-2"></i></a>
+        <router-link class="btn btn-warning" to="/blogs/new">post<i class="fa-solid fa-plus ms-2"></i></router-link>
       </div>
-      <div class="col-12 col-md-5 d-none d-lg-block text-center"><img
-              src="/assets/img/illustrations/meditating.svg" alt="girl meditating"></div>
+      <div class="col-12 col-md-5 d-none d-lg-block text-center"><img :src=img alt="girl meditating"></div>
     </div>
   </div>
 </section>
 <section class="section section-lg line-bottom-light">
   <div class="container mt-n10 mt-lg-n12 z-2">
-    <div class="row">
-      <c:forEach items="${hotPlaces}" var="hotPlace">
-
-        <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-5">
-          <c:import url="/views/components/blog/blog-item.jsp" >
-            <c:param value="${hotPlace.title}" name="title" />
-            <c:param value="${hotPlace.address}" name="address" />
-            <c:param value="${hotPlace.firstImage}" name="firstImage" />
-            <c:param value="${hotPlace.contentID}" name="contentID" />
-            <c:param value="${hotPlace.userName}" name="userName" />
-          </c:import>
-        </div>
-      </c:forEach>
-
+    <div class="row" v-if="blogs.length">
+        <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-5" v-for="(blog,index) in blogs" :key="index" >
+          <blog-item :item="blog"></blog-item>
+      </div>
     </div>
   </div>
 </section>
@@ -40,6 +29,27 @@
 </template>
     
 <script>
-export default {};
+import BlogItem from './BlogItem.vue';
+export default {
+  components:{
+    BlogItem
+  },
+  data() {
+      return {
+        blogs:[],
+        img:require("@/assets/img/illustrations/meditating.svg")
+    }},
+  created(){
+    this.list()
+    this.blogs=this.$store.state.BlogStore.posts
+    console.log("blogs",this.blogs)
+
+  },
+  methods:{
+    list: async function(){
+          await this.$store.dispatch("BlogStore/BlogList"); // 스토어의 액션을 호출합니다.
+  }
+}
+};
 </script>
     

@@ -1,16 +1,41 @@
 <template>
-  <div>
-    <h1>OpenAI GPT-3.5-Turbo Vue 예제</h1>
+  <main>
+    <section class="section-header pb-0">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 text-center">
+                        <h1 class="mb-3">어디로 떠날까요?</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+      
+    <section class="section section-lg pt-6">
+        <div class="container">
+            <div class="row justify-content-center mb-5 mb-lg-6">
+                <div class="col-12 col-lg-8">
+                    <div class="card border-0 p-2 p-md-3 p-lg-5">
+                        <div class="card-body px-0 pt-0">
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </div>
+    </section>
+
     <div>
-      <label for="user-input">사용자 입력:</label>
-      <!-- <input v-model="userInput" type="text" id="user-input"> -->
+      <label for="days">days:</label>
+      <input v-model="days" type="text" id="days">
+      <label for="city">city:</label>
+      <input v-model="city" type="text" id="city">
       <button @click="generateResponse">요청</button>
     </div>
     <div>
       <h3>모델 응답:</h3>
-      <p>{{ modelResponse }}</p>
+      {{ modelResponse }}
     </div>
-  </div>
+  </main>
 </template>
   
 <script>
@@ -34,7 +59,7 @@ export default {
   },
   methods: {
     async generateResponse() {
-      let basePrompt = `what is an ideal itinerary for ${this.days} days in ${this.city}? return format is markdown. 한국어로 말해줘`
+      let basePrompt = `what is an ideal itinerary for ${this.days} days in ${this.city}? return format is html. 한국어로 말해줘`
 
       try {
         const response = await openai.createChatCompletion({

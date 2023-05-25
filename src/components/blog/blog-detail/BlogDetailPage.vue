@@ -25,6 +25,7 @@
 
             <tiptap-editor class="col-lg-9 p-0" :active-buttons="[]" 
             :initialContent="blog.content"
+            :isJson="true"
             :editable="false"
             :border="false"
             />
@@ -60,6 +61,7 @@
   <script>
   import TiptapEditor from "@/components/editor/TiptapEditor.vue"
   import UtterancesComment from '../../board/UtterancesComment.vue';
+  // import { mapActions } from "vuex";
 
   export default {
     components: {
@@ -69,17 +71,23 @@
     data() {
       return {
         editor: null,
-        blog:{
-            title:"테스트",
-            userName:"김싸피",
-            content:" 크크크루삥뽕"
+        blog:{}
+    }
+  },created(){
+    this.read(),
+    this.blog=this.$store.state.BlogStore.post
+  },
+    computed: {
+
+    },
+    methods: {
+        // ...mapActions("BlogStore", ["DeletePost","ModifyPost","BlogRead"]),
+        read: async function(){
+          const id = this.$route.params.id; // id를 가져오기 위해 $route.params.id를 사용합니다.
+          await this.$store.dispatch("BlogStore/BlogRead",id); // 스토어의 액션을 호출합니다.
+        
         }
-    }
-    },methods:{
-      updateBlog(){
-        //서버로 blog 데이터 보내기
-      }
-    }
+    }, 
   };
   </script>
   

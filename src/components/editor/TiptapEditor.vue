@@ -156,8 +156,12 @@ export default {
   props: {
     initialContent: {
       type: String,
-      required: true,
+      require:true,
       default: '',
+    },
+    isJson: {
+      type: Boolean,
+      default: false,
     },
     activeButtons: {
       type: Array,
@@ -208,11 +212,10 @@ export default {
   },
   created() {
     this.editor = new Editor({
-      content: this.initialContent,
+      content: this.isJson?JSON.parse(this.initialContent):this.initialContent,
       extensions: [StarterKit, Underline],
     });
     this.editor.setOptions({editable: this.editable});
-
     this.json = this.editor.getJSON();
 
     this.editor.on('update', () => {

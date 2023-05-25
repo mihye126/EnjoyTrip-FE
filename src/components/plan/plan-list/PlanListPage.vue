@@ -4,9 +4,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 text-center">
-
-                        <h1 class="display-2 mb-3">어디로 떠나고 싶나요?</h1>
-                        <p> 여행을 떠나요</p>
+                        <h1 class="display-2 mb-3">나만의 여행계획을 만들어보자!</h1>
                     </div>
                 </div>
             </div>
@@ -15,12 +13,8 @@
         <div class="section section-md pt-4 mt-3">
             <div class="container">
                 <div class="row mb-4 mb-lg-5">
-                    <trip-search></trip-search>
-                </div>
-                <div class="row mb-4 mb-lg-5">
                     <div class="col-12">
                         <trip-item v-for="trip in trips" :key="trip.contentID" :trip="trip"></trip-item>
-<!-- <trip-item v-for="trip in trips" :key="trip.content_id" :trip="trip"></trip-item> -->
                     </div>
                 </div>
             </div>
@@ -33,12 +27,10 @@
     </main>
 </template>
 <script>
-import TripSearch from '../TripSearch.vue';
 import TripItem from './TripItem.vue';
 export default {
     components: {
         TripItem,
-        TripSearch
     },
     data() {
         return {
