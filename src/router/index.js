@@ -8,15 +8,14 @@ import BlogInputView from "@/views/BlogInputView.vue";
 import TripDetailView from "@/views/TripDetailView.vue";
 import PlanInputView from "@/views/PlanInputView.vue";
 import BlogDetailView from "@/views/BlogDetailView.vue";
-import TripListView from "@/views/TripListView.vue";
+// import TripListView from "@/views/TripListView.vue";
 import NoticeListView from "@/views/NoticeListView.vue";
 import NoticeInsertView from "@/views/NoticeInsertView.vue";
 import UserRegisterView from "@/views/UserRegisterView.vue";
 import TripRecommendView from "@/views/TripRecommendView.vue";
 import BlogEditView from "@/views/BlogEditView.vue";
 import BlogListView from "@/views/BlogListView.vue";
-
-
+import TripSerchView from "@/views/TripSerchView.vue";
 Vue.use(VueRouter);
 
 //VueRouter전역사용 위해.
@@ -31,6 +30,8 @@ export default new VueRouter({
     { path: "/trips", component: TripListView },
     { path: "/trips?sidocode=:sidocode&contentTypeID=:contentTypeID&keyword=:keyword", component: TripListView },
     { path: "/trips?sidocode=:sidocode&keyword=:keyword", component: TripListView },
+    // { path: "/trips", component: TripListView },
+    // { path: "/trips?sidocode=:sidocode", component: TripListView },
     { path: "/login", component: LoginView },
     { path: "/mypage", component: MyPageView },
     { path: "/blogs", component: BlogListView },
@@ -42,7 +43,16 @@ export default new VueRouter({
     { path: "/notice/list", component: NoticeListView },
     { path: "/notice/insert", component: NoticeInsertView },
     { path: "/register", component: UserRegisterView },
-    {path:"/recommend",component: TripRecommendView}
+    {path:"/recommend",component: TripRecommendView},
+    {
+      path: "/trips/serch",
+      component: TripSerchView,
+      name: "TripSerchView",
+    },
+    // {
+    //   path: "/trips?sidoCode=:sidoCode&contentTypeID=:contentTypeID&keyword=:keyword",
+    //   component: TripSerchView,
+    // },
 
     /* { path: "/modify/:no", component: TodoModify },
 		{ path: "/deleteAll", component: TodoModify },  */

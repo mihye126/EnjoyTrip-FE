@@ -180,5 +180,77 @@ export const userStore = {
         }
       );
     },
+    async UpdateLoginUser({ commit }, user) {
+      await updateLoginUser(
+        user,
+        ({ data }) => {
+          console.log(data);
+          if (data.error == null) {
+            let accessToken = data.data["accessToken"];
+            let refreshToken = data.data["refreshToken"];
+
+            // commit("SET_LOGINUSER_ID", data.data["id"]);
+            commit("SET_LOGINUSER_NAME", user.user_name);
+            // commit("SET_LOGINUSER_EMAIL", data.data["userEmail"]);
+            commit("SET_LOGINUSER_PHONE", user.user_phone);
+
+            sessionStorage.setItem("access-token", accessToken);
+            sessionStorage.setItem("refresh-token", refreshToken);
+          } else {
+            console.log("유저 수정 실패!!!");
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    async DeleteUser({ commit }, id) {
+      await deleteUser(
+        id,
+        ({ data }) => {
+          console.log(data);
+          if (data.error == null) {
+            commit("SET_IS_LOGIN", false);
+            commit("SET_IS_VALID_TOKEN", false);
+            commit("SET_IS_LOGIN_ERROR", false);
+            commit("SET_IS_ADMIN", false);
+
+            commit("SET_LOGINUSER_ID", null);
+            commit("SET_LOGINUSER_NAME", null);
+            commit("SET_LOGINUSER_EMAIL", null);
+            commit("SET_LOGINUSER_PHONE", null);
+
+            sessionStorage.removeItem("access-token");
+            sessionStorage.removeItem("refresh-token");
+            router.push("/");
+          } else {
+            console.log("유저 탈퇴 실패!!!");
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    async RegisterUser({ commit }, user) {
+      await registerUser(
+        user,
+        ({ data }) => {
+          console.log(commit);
+          if (data.data != null) {
+            alert("회원가입이 완료되었습니다. 로그인 후에 이용해주세요");
+            router.push("/");
+          } else {
+            alert("회원가입에 실패하였습니다. 정보를 다시 입력해주세요");
+            console.log("회원가입 실패!!!", data.data, "@@@", data.error);
+          }
+        },
+        (error) => {
+          console.log("WWW", error);
+        }
+      );
+    },
+
   },
 };
