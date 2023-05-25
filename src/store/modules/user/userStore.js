@@ -20,10 +20,10 @@ export const userStore = {
     isAdmin: false,
 
     LoginUser: {
-      id: "",
-      userEmail: "",
-      userPhone: "",
-      userName: "",
+      id: null,
+      userEmail: null,
+      userPhone: null,
+      userName: null,
     },
   },
   getters: {

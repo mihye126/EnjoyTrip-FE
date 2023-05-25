@@ -7,7 +7,10 @@
           <div class="col-12 col-lg-7">
             <h1 class="display-1 font-weight-extreme mb-4">Share Your Experience</h1>
             <p class="lead mb-4 mb-lg-5 me-lg-5">당신만의 특별한 경험을 공유하세요!</p>
-            <router-link class="btn btn-warning" to="/blogs/new"
+            <router-link
+              v-if="this.userId != null && this.userId != ''"
+              class="btn btn-warning"
+              to="/blogs/new"
               >post<i class="fa-solid fa-plus ms-2"></i
             ></router-link>
           </div>
@@ -35,12 +38,15 @@
 
 <script>
 import BlogItem from "./BlogItem.vue";
+import { mapGetters } from "vuex";
+const userStore = "userStore";
 export default {
   components: {
     BlogItem,
   },
   data() {
     return {
+      userId: null,
       blogs: [],
       img: require("@/assets/img/illustrations/meditating.svg"),
     };
@@ -48,11 +54,17 @@ export default {
   async created() {
     await this.list();
     this.blogs = this.$store.state.BlogStore.posts;
-    console.log("blogs", this.blogs);
+    await this.setUserID();
+    console.log("blogs", this.blogs, this.userId);
   },
+  computed: { ...mapGetters(userStore, ["checkUserId"]) },
+
   methods: {
     list: async function () {
       await this.$store.dispatch("BlogStore/BlogList"); // 스토어의 액션을 호출합니다.
+    },
+    setUserID: function () {
+      this.userId = this.checkUserId;
     },
   },
 };

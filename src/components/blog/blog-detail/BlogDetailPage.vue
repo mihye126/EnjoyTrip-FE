@@ -59,8 +59,10 @@
                 </div>
                 <div class="col-3 col-md-6 text-right">
                   <button
+                    v-if="this.blog.userId === this.userId"
                     class="btn btn-sm me-2 btn-icon-only btn-pill d-inline btn-danger"
                     aria-label="edit"
+                    @click="editblog"
                   >
                     <i class="fa-solid fa-pen"></i>
                   </button>
@@ -78,6 +80,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+const userStore = "userStore";
 import TiptapEditor from "@/components/editor/TiptapEditor.vue";
 import UtterancesComment from "../../board/UtterancesComment.vue";
 // import { mapActions } from "vuex";
@@ -89,20 +93,28 @@ export default {
   },
   data() {
     return {
-      editor: null,
       blog: {},
+      userId: "",
     };
   },
   async created() {
-    await this.read(), (this.blog = this.$store.state.BlogStore.post);
-    console.log("this ", this.blog);
+    await this.read();
+    this.blog = this.$store.state.BlogStore.post;
+    await this.setUserID();
+    console.log("this ", this.blog, this.userId);
   },
-  computed: {},
+  computed: { ...mapGetters(userStore, ["checkUserId"]) },
   methods: {
     // ...mapActions("BlogStore", ["DeletePost","ModifyPost","BlogRead"]),
     read: async function () {
       const id = this.$route.params.id; // id를 가져오기 위해 $route.params.id를 사용합니다.
       await this.$store.dispatch("BlogStore/BlogRead", id); // 스토어의 액션을 호출합니다.
+    },
+    setUserID: function () {
+      this.userId = this.checkUserId;
+    },
+    editblog: function () {
+      console.log("hihihi");
     },
   },
 };
