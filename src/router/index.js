@@ -16,6 +16,8 @@ import TripRecommendView from "@/views/TripRecommendView.vue";
 import BlogEditView from "@/views/BlogEditView.vue";
 import BlogListView from "@/views/BlogListView.vue";
 import TripSerchView from "@/views/TripSerchView.vue";
+import ErrorView from "@/views/ErrorView.vue";
+
 Vue.use(VueRouter);
 
 //VueRouter전역사용 위해.
@@ -49,6 +51,9 @@ export default new VueRouter({
       component: TripSerchView,
       name: "TripSerchView",
     },
+
+    {path:"/:error",component: ErrorView},
+
     // {
     //   path: "/trips?sidoCode=:sidoCode&contentTypeID=:contentTypeID&keyword=:keyword",
     //   component: TripSerchView,
