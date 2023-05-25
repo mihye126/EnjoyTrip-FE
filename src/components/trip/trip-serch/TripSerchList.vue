@@ -3,6 +3,7 @@
   <section class="section-header">
     <div class="container">
       <!-- 게시판 시작-->
+      <TripSearch></TripSearch>
       <section class="section-header overflow-hidden pb-0 my-5">
         <div class="container">
           <div class="row">
@@ -55,9 +56,11 @@
 
 <script>
 import TripSearchItem from "./TripSerchItem.vue";
+import TripSearch from "../TripSearch.vue";
 export default {
   components: {
     TripSearchItem,
+    TripSearch,
   },
   data() {
     return {

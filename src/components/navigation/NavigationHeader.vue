@@ -50,12 +50,12 @@
           <div v-if="token == false">
             <router-link
               to="/login"
-              target="_blank"
+              @click="loginCurrentRoutecheck"
               class="btn btn-outline-gray-100 d-none d-lg-inline me-md-3"
             >
               Sign In</router-link
             >
-            <router-link to="/register" target="_blank" class="btn btn-tertiary">
+            <router-link to="/register" @click="registerCurrentRoutecheck" class="btn btn-tertiary">
               <i class="fa-solid fa-right-to-bracket"></i> Sign Up
             </router-link>
             <button
@@ -140,6 +140,16 @@ export default {
     },
     mypage: async function () {
       this.$router.push("/mypage").catch(() => {});
+    },
+    loginCurrentRoutecheck() {
+      if (this.$route.path === "/login") {
+        return false; // 링크를 막음
+      }
+    },
+    registerCurrentRoutecheck() {
+      if (this.$route.path === "/register") {
+        return false; // 링크를 막음
+      }
     },
   },
 };
