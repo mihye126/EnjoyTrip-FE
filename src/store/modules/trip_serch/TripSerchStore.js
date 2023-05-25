@@ -6,6 +6,7 @@ export const TripSerchStore = {
     TripSerch: [],
     endPage: 0,
     endIdx: 0,
+    input:{},
   },
   getters: {},
   mutations: {
@@ -16,6 +17,9 @@ export const TripSerchStore = {
       state.endIdx = data.count;
       state.endPage = parseInt(state.endIdx / 10 + 1);
     },
+    SET_INPUT:(state,data)=>{
+      state.input = data;
+    }
   },
 
   actions: {

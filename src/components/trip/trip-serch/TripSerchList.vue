@@ -16,7 +16,7 @@
     <div class="section section-md pt-4 mt-3">
       <div class="container">
         <div class="row mb-4 mb-lg-5">
-          <!-- <trip-search></trip-search> -->
+          <trip-search></trip-search>
         </div>
         <div class="row mb-4 mb-lg-5">
           <div class="col-12">
@@ -54,9 +54,12 @@
 
 <script>
 import TripSearchItem from "./TripSerchItem.vue";
+import TripSearch from "./TripListSearch.vue";
+
 export default {
   components: {
     TripSearchItem,
+    TripSearch,
   },
   data() {
     return {
@@ -67,6 +70,27 @@ export default {
       page: 1,
       endpage: 0,
     };
+  },computed:{
+     getInput: function(){
+      return  this.$store.state.TripSerchStore.input;
+    }
+  },
+  watch:{
+    async getInput(input){
+      this.sidoCode = input.sidoCode;
+      this.contentTypeId = input.contentTypeId;
+      this.keyword = input.keyword;
+      this.page=input.page;
+
+      await this.setTripSerchItem();
+      await this.$store.dispatch("TripSerchStore/EndPageNum", {
+      sidoCode: this.sidoCode,
+      contentTypeId: this.contentTypeId,
+      keyword: this.keyword,
+    });
+    this.endpage = this.$store.state.TripSerchStore.endPage;
+    }
+
   },
   created: async function () {
     this.sidoCode = this.$route.params.param1;

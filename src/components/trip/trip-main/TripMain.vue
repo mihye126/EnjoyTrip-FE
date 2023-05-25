@@ -164,7 +164,7 @@
 
 <script>
 import { RouterLink } from "vue-router";
-import TripSearch from "../TripSearch.vue";
+import TripSearch from "./TripSearch.vue";
 // import http from "@/router/axios-common.js";
 export default {
   created() {},

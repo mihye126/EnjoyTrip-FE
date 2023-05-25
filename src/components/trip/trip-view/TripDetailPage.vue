@@ -28,38 +28,13 @@
           </div>
         </div>
 
-          <div class="row align-items-center pt-4 mb-3">
-            <div class="card text-center">
-              <div class="card-body">
-                <div class="row align-items-center">
-                  <div class="col-md-3">
-                <h4 class="text-primary mb-4 mt-2">오늘의 날씨는</h4>
-                <span class="d-block">
-                  <span class="display-1 text-dark fw-bold">
-                    <img :src="sky[1]" class="wheater-img"/>
-                  </span>
-                  </span>
-                </div>
-                <div class="col-md-9">
-
-                <ul class="list-unstyled mb-4">
-                  <li class="list-item pb-3"><strong>1</strong> free domain</li>
-                  <li class="list-item pb-3">Storage space: <strong>5GB</strong></li>
-                  <li class="list-item pb-3"><strong>100k</strong> monthly visitors</li>
- 
-                </ul>
-                </div>
-              </div>
-              </div>
-          </div>
-        </div>
         <div class="row align-items-center pt-4 mb-3">
           <!-- kakao map start -->
             <trip-map></trip-map>
           </div>
         <div class="row justify-content-sm-center align-items-center py-3">
 
-          <div class="col-12 col-lg-10  my-1 ">
+          <!-- <div class="col-12 col-lg-10  my-1 ">
             <div class="d-flex justify-content-center">
               <AwesomeVueStarRating :star="this.star" :disabled="true" :maxstars="this.maxstars" :starsize="`2x`"
                 :hasresults="this.hasresults" :hasdescription="this.hasdescription" />
@@ -80,7 +55,7 @@
             </div>
 
 
-          </div>
+          </div> -->
 
           <div class="col-12 col-lg-9">
             <div class="row">
@@ -98,14 +73,14 @@
 
 <script>
 import UtterancesComment from '../../board/UtterancesComment.vue';
-import AwesomeVueStarRating from 'awesome-vue-star-rating'
+// import AwesomeVueStarRating from 'awesome-vue-star-rating'
 import TripMap from './TripDetailMap.vue';
 
 
 export default {
   components: {
     UtterancesComment,
-    AwesomeVueStarRating,
+    // AwesomeVueStarRating,
     TripMap
   },
   data() {
@@ -122,11 +97,11 @@ export default {
       }
     };
   },
-  created() {
-    this.$store.dispatch("tripDetailStore/TripDetailinfo", this.$route.params.contentID);
-    this.setAttraction();
+  async created() {
+    await this.$store.dispatch("tripDetailStore/TripDetailinfo", this.$route.params.contentID);
+    await this.setAttraction();
     console.log(this.attraction.first_Image);
-    this.getFormattedLatitude();
+    await this.getFormattedLatitude();
   },
   methods: {
     setAttraction: function () {
