@@ -14,7 +14,7 @@
               <div class="text-center text-md-center mb-4 mt-md-0">
                 <h1 class="mb-0 h3">회원가입</h1>
               </div>
-              <form action="/account/registerProcess" method="post">
+              <form action="" method="post">
                 <div class="form-group mb-4">
                   <label for="name">이름</label>
                   <div class="input-group">
@@ -27,29 +27,12 @@
                       placeholder="홍길동"
                       id="name"
                       name="name"
-                      v-model="user.name"
+                      v-model="user.user_name"
                       required
                     />
                   </div>
                 </div>
                 <!-- Form -->
-                <div class="form-group mb-4">
-                  <label for="id">아이디</label>
-                  <div class="input-group">
-                    <span class="input-group-text" id="basic-addon3"
-                      ><span class="fas fa-envelope"></span
-                    ></span>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="example"
-                      id="id"
-                      name="id"
-                      v-model="user.id"
-                      required
-                    />
-                  </div>
-                </div>
                 <div class="form-group mb-4">
                   <label for="email">이메일</label>
                   <div class="input-group">
@@ -62,7 +45,24 @@
                       placeholder="example@gmail.com"
                       id="email"
                       name="email"
-                      v-model="user.email"
+                      v-model="user.user_email"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="form-group mb-4">
+                  <label for="email">휴대전화번호</label>
+                  <div class="input-group">
+                    <span class="input-group-text" id="basic-addon3"
+                      ><span class="fas fa-envelope"></span
+                    ></span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="010-0000-0000"
+                      id="phone"
+                      name="phone"
+                      v-model="user.user_phone"
                       required
                     />
                   </div>
@@ -82,7 +82,7 @@
                         class="form-control"
                         id="password"
                         name="password"
-                        v-model="user.pw"
+                        v-model="user.user_pw"
                         required
                       />
                     </div>
@@ -109,7 +109,7 @@
                   <!-- End of Form -->
                 </div>
                 <div class="d-grid">
-                  <button @click="register" class="btn btn-primary">회원가입</button>
+                  <button @click.prevent="register" class="btn btn-primary">회원가입</button>
                 </div>
               </form>
 
@@ -131,13 +131,12 @@ export default {
   data() {
     return {
       user: {
-        id: "",
-        pw: "",
-        name: "",
-        phone: "",
-        email: "",
+        user_pw: "",
+        user_name: "",
+        user_phone: "",
+        user_email: "",
         token: null,
-        admin_check: false,
+        admin_check: 0,
       },
       pwConfirm: "",
     };
@@ -145,11 +144,19 @@ export default {
   methods: {
     register: async function () {
       console.log(this.user);
-      await this.$store.dispatch("userStore/RegisterUser", this.user);
-      this.$router.push("/");
+      if (this.samepassword()) {
+        await this.$store.dispatch("userStore/RegisterUser", this.user);
+      } else {
+        alert("비밀번호가 일치하지 않습니다.");
+      }
     },
     login: function () {
       this.$router.push("/login");
+    },
+    samepassword: function () {
+      if (this.pwConfirm == this.user.user_pw) {
+        return true;
+      } else return false;
     },
   },
 };

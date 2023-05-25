@@ -6,7 +6,7 @@
       class="navbar navbar-main navbar-expand-lg navbar-theme-primary headroom navbar-dark bg-primary"
     >
       <div class="container position-relative">
-        <router-link class="navbar-brand me-lg-5" to="/trips">
+        <router-link class="navbar-brand me-lg-5" to="/">
           <div>
             <img class="navbar-brand-dark" src="/assets/img/brand/light.svg" alt="Logo light" />
             <img class="navbar-brand-light" src="/assets/img/brand/dark.svg" alt="Logo dark" />
@@ -39,7 +39,7 @@
               <router-link to="/notice/list" class="nav-link">Notice</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/trip/list" class="nav-link">Trips</router-link>
+              <router-link to="/trips/list" class="nav-link">Trips</router-link>
             </li>
             <li class="nav-item">
               <router-link to="/hotPlace/list" class="nav-link">Blog</router-link>
@@ -114,6 +114,11 @@ export default {
   created() {
     this.setUserName(), this.setUserToken(), this.setUserID();
   },
+  watch: {
+    checkToken() {
+      this.setUserToken();
+    },
+  },
   computed: {
     ...mapGetters(userStore, ["checkUserName"]),
     ...mapGetters(userStore, ["checkToken"]),
@@ -131,10 +136,10 @@ export default {
     },
     logout: async function () {
       await this.$store.dispatch("userStore/userLogout", this.userId);
-      this.$router.push("/");
+      this.$router.push("/").catch(() => {});
     },
     mypage: async function () {
-      this.$router.push("/mypage");
+      this.$router.push("/mypage").catch(() => {});
     },
   },
 };
