@@ -71,9 +71,7 @@
                     <label class="form-check-label mb-0" for="remember"> Remember me </label>
                   </div>
                   <div>
-                    <router-link to="/account/password" class="small text-right"
-                      >비밀번호 찾기</router-link
-                    >
+                    <router-link to="/findbypw" class="small text-right">비밀번호 찾기</router-link>
                   </div>
                 </div>
               </div>

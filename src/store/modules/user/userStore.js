@@ -8,6 +8,8 @@ import {
   updateLoginUser,
   deleteUser,
   registerUser,
+  findbyemail,
+  modifyuserpw,
 } from "./userfuntion";
 
 export const userStore = {
@@ -18,6 +20,8 @@ export const userStore = {
     userInfo: null,
     isValidToken: false,
     isAdmin: false,
+    findByEmailCheck: false,
+    modifyuserid: null,
 
     LoginUser: {
       id: null,
@@ -51,6 +55,12 @@ export const userStore = {
     checkUserName: function (state) {
       return state.LoginUser.userName;
     },
+    checkFindByEmail: function (state) {
+      return state.findByEmailCheck;
+    },
+    checkModifyUserId: function (state) {
+      return state.modifyuserid;
+    },
   },
   mutations: {
     SET_IS_LOGIN: (state, isLogin) => {
@@ -68,6 +78,9 @@ export const userStore = {
     SET_IS_ADMIN: (state, isAdmin) => {
       state.isAdmin = isAdmin;
     },
+    SET_MODIFY_USER_ID: (state, id) => {
+      state.modifyuserid = id;
+    },
 
     //추가로 넣은 부분, userID && isAdmin도 loginUser객체로 넣는게 나을려나...?
     SET_LOGINUSER_ID: (state, userId) => {
@@ -81,6 +94,9 @@ export const userStore = {
     },
     SET_LOGINUSER_PHONE: (state, userPhone) => {
       state.LoginUser.userPhone = userPhone;
+    },
+    SET_FIND_BY_EMAIL_CHECK: (state, emailcheck) => {
+      state.findByEmailCheck = emailcheck;
     },
   },
   actions: {
@@ -281,10 +297,57 @@ export const userStore = {
             router.push("/");
           } else {
             alert("회원가입에 실패하였습니다. 정보를 다시 입력해주세요");
-            console.log("회원가입 실패!!!", data.data, "@@@", data.error);
           }
         },
         (error) => {
+          console.log(error);
+        }
+      );
+    },
+    async FindByEmail({ commit }, email) {
+      console.log(email);
+      await findbyemail(
+        email,
+        ({ data }) => {
+          console.log(commit);
+          if (data.data != null) {
+            console.log(data.data);
+            commit("SET_FIND_BY_EMAIL_CHECK", true);
+            commit("SET_MODIFY_USER_ID", data.data.id);
+          } else {
+            alert("해당 유저는 존재하지 않습니다. 이메일을 다시 입력해주세요.");
+            commit("SET_FIND_BY_EMAIL_CHECK", false);
+            console.log("유저 이메일 조회 실패!!!", data.data, "@@@", data.error);
+          }
+        },
+        (error) => {
+          alert("해당 유저는 존재하지 않습니다. 이메일을 다시 입력해주세요.");
+
+          commit("SET_FIND_BY_EMAIL_CHECK", false);
+
+          console.log("WWW", error);
+        }
+      );
+    },
+    async ModifyUserPw({ commit }, request) {
+      console.log(request);
+      await modifyuserpw(
+        request,
+        ({ data }) => {
+          console.log(commit);
+          if (data.data != null) {
+            alert("비밀번호 변경이 완료되었습니다. 로그인 후 이용해주세요.");
+            console.log(data.data);
+            router.push("/login");
+          } else {
+            alert("비밀번호 변경에 실패했습니다. 다시 시도해주세요");
+
+            console.log("비밀번호 변경 실패!!!", data.data, "@@@", data.error);
+          }
+        },
+        (error) => {
+          alert("비밀번호 변경에 실패했습니다. 다시 시도해주세요");
+
           console.log("WWW", error);
         }
       );

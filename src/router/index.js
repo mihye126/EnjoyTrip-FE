@@ -15,6 +15,8 @@ import TripRecommendView from "@/views/TripRecommendView.vue";
 import BlogEditView from "@/views/BlogEditView.vue";
 import BlogListView from "@/views/BlogListView.vue";
 import TripSerchView from "@/views/TripSerchView.vue";
+import FindByPwView from "@/views/FindByPwView.vue";
+
 import ErrorView from "@/views/ErrorView.vue";
 
 Vue.use(VueRouter);
@@ -28,7 +30,7 @@ export default new VueRouter({
   mode: "history",
   routes: [
     { path: "/", component: TripMainView, name: "TripMainView" },
-    { path: "/trips",component: TripSerchView,name: "TripSerchView",},
+    { path: "/trips", component: TripSerchView, name: "TripSerchView" },
     { path: "/login", component: LoginView },
     { path: "/mypage", component: MyPageView },
     { path: "/blogs", component: BlogListView },
@@ -40,9 +42,10 @@ export default new VueRouter({
     { path: "/notice", component: NoticeListView },
     { path: "/notice/insert", component: NoticeInsertView },
     { path: "/register", component: UserRegisterView },
-    {path:"/recommend",component: TripRecommendView},
+    { path: "/recommend", component: TripRecommendView },
+    { path: "/findbypw", component: FindByPwView },
 
-    {path:"/:error",component: ErrorView},
+    { path: "/:error", component: ErrorView },
 
     // {
     //   path: "/trips?sidoCode=:sidoCode&contentTypeID=:contentTypeID&keyword=:keyword",

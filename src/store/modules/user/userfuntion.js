@@ -29,4 +29,20 @@ async function deleteUser(id, success, fail) {
 async function registerUser(user, success, fail) {
   await http.post(`/registeruser`, user).then(success).catch(fail);
 }
-export { login, findById, tokenRegeneration, logout, updateLoginUser, deleteUser, registerUser };
+async function findbyemail(email, success, fail) {
+  await http.post(`/findbyemail`, email).then(success).catch(fail);
+}
+async function modifyuserpw(request, success, fail) {
+  await http.put(`/modifyuserpw`, request).then(success).catch(fail);
+}
+export {
+  login,
+  findById,
+  tokenRegeneration,
+  logout,
+  updateLoginUser,
+  deleteUser,
+  registerUser,
+  findbyemail,
+  modifyuserpw,
+};
