@@ -32,4 +32,3 @@ async function registerUser(user, success, fail) {
   // await http.post(`/registeruser`, user).then(success).catch(fail);
 }
 export { login, findById, tokenRegeneration, logout, updateLoginUser, deleteUser, registerUser };
-
