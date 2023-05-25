@@ -42,7 +42,7 @@
               <router-link to="/trips/list" class="nav-link">Trips</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/hotPlace/list" class="nav-link">Blog</router-link>
+              <router-link to="/blogs" class="nav-link">Blog</router-link>
             </li>
           </ul>
         </div>
