@@ -91,8 +91,6 @@ export default {
         page: this.page,
       });
       this.trips = this.$store.state.TripSerchStore.TripSerch;
-
-      //   console.log("trips", this.trips);
     },
     down: function () {
       if (this.page > 1) {

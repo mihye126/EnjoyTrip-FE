@@ -6,7 +6,7 @@
           <img :src="trip.firstImage" :alt="trip.title" />
         </div>
         <div class="col-md-9">
-          <router-link :to="`/trips/${trip.content_id}`"
+          <router-link :to="`/trips/${trip.contentID}`"
             ><h4 class="mb-3">{{ trip.title }}</h4></router-link
           >
           <p class="mb-4">{{ trip.address }}</p>
